@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>MWeb</title>
-
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -40,7 +40,9 @@
 			return data;
 	}
 
-	function getDefaultData(){return{};}
+	function getDefaultData(){return{
+			"cat":["早堂","午堂","堂費","感恩","青年","兒童","長者"]
+	};}
 
 	data_obj={};
 	$(document).ready(function(){
@@ -80,6 +82,31 @@
 							//$('#page_manage_data #textarea_data').text(data_str);
 					});
 
+			$(document).on('pagebeforecreate', '#page_add_entry', function(){
+			    // Add a new select element
+					for (i=0; i<data_obj.cat.length; i++){
+							if (i==0) {
+									$('<option>').attr({'value':data_obj.cat[i]}).attr('selected', true).html(data_obj.cat[i]).appendTo('#page_add_entry select#select_cat');
+							}
+							else {
+									$('<option>').attr({'value':data_obj.cat[i]}).html(data_obj.cat[i]).appendTo('#page_add_entry select#select_cat');
+							}
+					}
+			    // Enhance new select element
+					//$('#page_add_entry select#select_cat').val($("#page_add_entry select#select_cat option:first").val());;
+			    $('#page_add_entry select#select_cat').selectmenu()
+
+			});
+			$('#page_add_entry')
+					.on( 'pageshow', function ( event, ui) {
+
+					})
+					.on('vclick','#btn_add_entry', function(event){
+
+					})
+					.on('vclick','#btn_reset_all', function(event){
+
+					})
 	});
 	</script>
 </head>
@@ -138,13 +165,66 @@
 
 	<div role="main" class="ui-content">
 		<textarea cols="40" rows="8" id="textarea_data"></textarea>
-		<button data-inline="true" id='btn_load_data'>Load Data</button>
-		<button data-inline="true" id='btn_clear_all'>Clear All</button>
+		<button data-inline="true" id='btn_load_data'>Load Data to Local Storage</button>
+		<button data-inline="true" id='btn_clear_all'>Clear and Reset</button>
 	</div><!-- /content -->
 
 	<div data-role="footer">
 		<h4><a href="#page_main">Back to main</a></h4>
 	</div><!-- /footer -->
 </div><!-- /page manage data-->
+
+
+<!-- Start of page_add_entry page -->
+<div data-role="page" id="page_add_entry">
+
+	<div data-role="header">
+		<h1>Add Entry</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+    <select name="select_cat" id="select_cat">
+    </select>
+		<div class="ui-grid-d">
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-d"><div ><input type="button" value="Hmm"></div></div>
+		</div><!-- /grid-c -->
+		<p> Add Entry </p>
+		<div class="ui-grid-b">
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="button" data-inline="true" value="--">
+						<input type="button" data-inline="true" value="-">
+						<span>12</span>
+						<input type="button" data-inline="true" value="+">
+						<input type="button" data-inline="true" value="++">
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$500</div></div>
+		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="button" data-inline="true" value="--">
+						<input type="button" data-inline="true" value="-">
+						<span>12</span>
+						<input type="button" data-inline="true" value="+">
+						<input type="button" data-inline="true" value="++">
+				</div></div>
+		</div><!-- /grid-c -->
+
+		<button data-inline="true" id='btn_add_entry'>Add Entry</button>
+		<button data-inline="true" id='btn_reset_all'>Reset</button>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_add_entry -->
+
 </body>
 </html>
