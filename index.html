@@ -8,6 +8,80 @@
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script>
+	//Credit: http://diveintohtml5.org/storage.html
+	function supports_html5_storage() {
+	  try {
+	    return 'localStorage' in window && window['localStorage'] !== null;
+	  } catch (e) {
+	    return false;
+	  }
+	}
+	function supports_json() {
+	  try {
+	    return 'JSON' in window && window['JSON'] !== null;
+	  } catch (e) {
+	    return false;
+	  }
+	}
+
+	//save storage
+	storage_data_label='mweb.rainfalcon.github.io';
+	function saveStorage(data){
+			console.log("To store...");
+			console.dir(data);
+			localStorage[storage_data_label] = window.JSON.stringify(data);
+	}
+	//loading from storage
+	function getStorage(){
+			var current = localStorage[storage_data_label];
+			var data = {};
+			if(typeof current != "undefined") data=window.JSON.parse(current);
+			return data;
+	}
+
+	function getDefaultData(){return{};}
+
+	data_obj={};
+	$(document).ready(function(){
+			if (!supports_json() || !supports_html5_storage()) {
+					alert('Browser not support json or storage!');
+					return;
+			}
+			else {
+					data_obj = getStorage();
+
+			}
+			//load data from storage
+			data_obj=getStorage();
+			if(data_obj=={}) {
+					data_obj=getDefaultData();
+			}
+
+			$('#page_main').on( "pageshow", function( event, ui ) {
+					//alert( "This page was just shown xxx "  );
+			});
+
+			$('#page_manage_data')
+					.on( "pageshow", function( event, ui ) {
+							data_str=window.JSON.stringify(data_obj);
+							$('#page_manage_data #textarea_data').text(data_str);
+					})
+					.on('vclick','#btn_clear_all', function(event){
+							data_obj=getDefaultData();
+							data_str=window.JSON.stringify(data_obj);
+							$('#page_manage_data #textarea_data').text(data_str);
+					})
+					.on('vclick','#btn_load_data', function(event){
+							data_str=$('#page_manage_data #textarea_data').val();
+							data_obj=window.JSON.parse(data_str);
+							saveStorage(data_obj);
+							//data_str=window.JSON.stringify(data_obj);
+							//$('#page_manage_data #textarea_data').text(data_str);
+					});
+
+	});
+	</script>
 </head>
 <body>
 
@@ -19,17 +93,21 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-		<p>I'm first in the source order so I'm shown as the page.</p>
-		<p>View internal page called <a href="#bar">bar</a></p>
-		<p>Views Report</p>
-		<p>Data modification</p>
-		<p><a href="#page_manage_data">Manage All entries</a></p>
-		<p>Add Entries</p>
-		<p>Delete Entries</p>
+		<ulx data-role="listview" data-ajax="false" data-inset="true" data-theme="d" />
+		<ul data-role="listview" data-inset="true">
+    		<li data-role="list-divider">Views</li>
+				<li><a href="#page_view_by_cat">View by Cat</a></li>
+				<li><a href="#page_view_by_bankin">View by BankIn</a></li>
+				<li><a href="#page_view_by_givingbag">View by GivingBag</a></li>
+				<li data-role="list-divider">Entries</li>
+				<li><a href="#page_manage_data">Manage All</a></li>
+				<li><a href="#page_add_entry">Add Entries</a></li>
+				<li><a href-"#page_del_entry">Delete Entries</a></li>
+		</ul>
 	</div><!-- /content -->
 
 	<div data-role="footer">
-		<h4>Page Footer</h4>
+		<h4>Main Footer</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
 
@@ -49,8 +127,8 @@
 		<h4>Page Footer</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
-	
-	
+
+
 <!-- Start of manage data page -->
 <div data-role="page" id="page_manage_data">
 
@@ -59,10 +137,9 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-		<p>textbox with json data</p>
-		<button>Load Data</button>
-		<button>Clear All</button>
-		<p><a href="#page_main">Back to main</a></p>
+		<textarea cols="40" rows="8" id="textarea_data"></textarea>
+		<button data-inline="true" id='btn_load_data'>Load Data</button>
+		<button data-inline="true" id='btn_clear_all'>Clear All</button>
 	</div><!-- /content -->
 
 	<div data-role="footer">
