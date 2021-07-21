@@ -42,6 +42,7 @@
 
 	function getDefaultData(){return{
 			"cat":["早堂","午堂","堂費","感恩","青年","兒童","長者"]
+			, "pocket":[]
 	};}
 
 	data_obj={};
@@ -164,6 +165,7 @@
 							$('#page_cat_edit #grid_pocket_add #coin_01_total').text($('#page_cat_edit #grid_pocket_add #coin_01_cnt').val() * 0.1) ;
 					})
 					.on('vclick','#btn_add_entry', function(event){
+							refreshCatEdit();
 					})
 					.on('vclick','#btn_reset_all', function(event){
 
@@ -177,6 +179,46 @@
 			$('#page_cat_edit #grid_pocket_add').hide();
 			$('#page_cat_edit #grid_pocket_add input').val('');
 			$('#page_cat_edit #grid_pocket_add .coin_total').text('');
+	}
+	function refreshCatEdit(){
+			var entry = {
+					"cat":$('#page_cat_edit select#select_cat').val()
+					, "coins":[
+							$('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_500_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_100_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_50_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_20_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_10_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_5_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_2_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_1_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_05_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_02_cnt').val()
+						,	$('#page_cat_edit #grid_pocket_add #coin_01_cnt').val()
+					]
+					, "cheque_cnt":0
+					, "cheque_amt":0
+					, "prepaid_amt":0
+					, "total":0
+			};
+			entry.total = entry.coins[0]*1000
+									+ entry.coins[1]*500
+									+ entry.coins[2]*100
+									+ entry.coins[3]*50
+									+ entry.coins[4]*20
+									+ entry.coins[5]*10
+									+ entry.coins[6]*10
+									+ entry.coins[7]*5
+									+ entry.coins[8]*2
+									+ entry.coins[9]*1
+									+ entry.coins[10]*0.5
+									+ entry.coins[11]*0.2
+									+ entry.coins[12]*0.1;
+			//alert(window.JSON.stringify(entry));
+			data_obj.pocket.splice(0,0,window.JSON.parse(window.JSON.stringify(entry)));
+
 	}
 	</script>
 </head>
