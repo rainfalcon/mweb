@@ -105,34 +105,63 @@
 							$('#page_cat_edit #grid_pocket_add').hide();
 					})
 					.on( 'pageshow', function ( event, ui) {
+							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_smry').show();
-							$('#page_cat_edit #grid_pocket_dtls').hide();
-							$('#page_cat_edit #grid_coin_smry').hide();
-							$('#page_cat_edit #grid_pocket_add').hide();
 					})
 					.on('vclick','#btn_pkt_smry', function(event){
+							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_smry').show();
-							$('#page_cat_edit #grid_pocket_dtls').hide();
-							$('#page_cat_edit #grid_coin_smry').hide();
-							$('#page_cat_edit #grid_pocket_add').hide();
 					})
 					.on('vclick','#btn_pkt_dtls', function(event){
-							$('#page_cat_edit #grid_pocket_smry').hide();
+							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_dtls').show();
-							$('#page_cat_edit #grid_coin_smry').hide();
-							$('#page_cat_edit #grid_pocket_add').hide();
 					})
 					.on('vclick','#btn_coin_smry', function(event){
-							$('#page_cat_edit #grid_pocket_smry').hide();
-							$('#page_cat_edit #grid_pocket_dtls').hide();
+							clearCatEdit();
 							$('#page_cat_edit #grid_coin_smry').show();
-							$('#page_cat_edit #grid_pocket_add').hide();
 					})
 					.on('vclick','#btn_pkt_add', function(event){
-							$('#page_cat_edit #grid_pocket_smry').hide();
-							$('#page_cat_edit #grid_pocket_dtls').hide();
-							$('#page_cat_edit #grid_coin_smry').hide();
+							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_add').show();
+					})
+					.on('change', '#grid_pocket_add #coin_1000_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_1000_total').text($('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val() * 1000) ;
+					})
+					.on('change', '#grid_pocket_add #coin_500_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_500_total').text($('#page_cat_edit #grid_pocket_add #coin_500_cnt').val() * 500) ;
+					})
+					.on('change', '#grid_pocket_add #coin_100_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_100_total').text($('#page_cat_edit #grid_pocket_add #coin_100_cnt').val() * 100) ;
+					})
+					.on('change', '#grid_pocket_add #coin_50_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_50_total').text($('#page_cat_edit #grid_pocket_add #coin_50_cnt').val() * 50) ;
+					})
+					.on('change', '#grid_pocket_add #coin_20_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_20_total').text($('#page_cat_edit #grid_pocket_add #coin_20_cnt').val() * 20) ;
+					})
+					.on('change', '#grid_pocket_add #coin_10_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_10_total').text($('#page_cat_edit #grid_pocket_add #coin_10_cnt').val() * 10) ;
+					})
+					.on('change', '#grid_pocket_add #coin_10c_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_10c_total').text($('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val() * 10) ;
+					})
+					.on('change', '#grid_pocket_add #coin_5_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_5_total').text($('#page_cat_edit #grid_pocket_add #coin_5_cnt').val() * 5) ;
+					})
+					.on('change', '#grid_pocket_add #coin_2_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_2_total').text($('#page_cat_edit #grid_pocket_add #coin_2_cnt').val() * 2) ;
+					})
+					.on('change', '#grid_pocket_add #coin_1_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_1_total').text($('#page_cat_edit #grid_pocket_add #coin_1_cnt').val() * 1) ;
+					})
+					.on('change', '#grid_pocket_add #coin_05_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_05_total').text($('#page_cat_edit #grid_pocket_add #coin_05_cnt').val() * 0.5) ;
+					})
+					.on('change', '#grid_pocket_add #coin_02_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_02_total').text($('#page_cat_edit #grid_pocket_add #coin_02_cnt').val() * 0.2) ;
+					})
+					.on('change', '#grid_pocket_add #coin_01_cnt', function(event){
+							$('#page_cat_edit #grid_pocket_add #coin_01_total').text($('#page_cat_edit #grid_pocket_add #coin_01_cnt').val() * 0.1) ;
 					})
 					.on('vclick','#btn_add_entry', function(event){
 					})
@@ -140,6 +169,15 @@
 
 					})
 	});
+
+	function clearCatEdit(){
+			$('#page_cat_edit #grid_pocket_smry').hide();
+			$('#page_cat_edit #grid_pocket_dtls').hide();
+			$('#page_cat_edit #grid_coin_smry').hide();
+			$('#page_cat_edit #grid_pocket_add').hide();
+			$('#page_cat_edit #grid_pocket_add input').val('');
+			$('#page_cat_edit #grid_pocket_add .coin_total').text('');
+	}
 	</script>
 </head>
 <body>
@@ -240,7 +278,7 @@
 				<div class="ui-block-d"><div ><input type="button" value="Delete"></div></div>
 		</div><!-- /grid_pocket_dtls -->
 		<div id="grid_coin_smry" class="ui-grid-b">
-				<legend>Coins Details:</legend>
+				<legend>Coins Summary:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
@@ -248,7 +286,6 @@
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
 		</div><!-- /grid-c -->
-		<p> Add Entry </p>
 		<div id="grid_pocket_add" class="ui-grid-b">
 				<legend>Add Pocket:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
@@ -256,13 +293,99 @@
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1000</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
-						<input type="number" data-inline="true" value="2">
+						<input type="number" data-inline="true" id="coin_1000_cnt" value="">
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_1000_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">500</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_500_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_500_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">100</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_100_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_100_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">50</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_50_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_50_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">20</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_20_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_20_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_10_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_10_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10c</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_10c_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_10c_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">5</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_5_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_5_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_2_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_2_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_1_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_1_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.5</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_05_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_05_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.2</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_02_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_02_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.1</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_01_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_01_total"><span>
+				</div></div>
+				<button data-inline="true" id='btn_add_entry'>Add Entry</button>
+				<button data-inline="true" id='btn_reset_all'>Reset</button>
 		</div><!-- /grid-c -->
 
-		<button data-inline="true" id='btn_add_entry'>Add Entry</button>
-		<button data-inline="true" id='btn_reset_all'>Reset</button>
 	</div><!-- /content -->
 
 	<div data-role="footer">
