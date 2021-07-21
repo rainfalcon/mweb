@@ -82,27 +82,59 @@
 							//$('#page_manage_data #textarea_data').text(data_str);
 					});
 
-			$(document).on('pagebeforecreate', '#page_add_entry', function(){
+			$(document).on('pagebeforecreate', '#page_cat_edit', function(){
 			    // Add a new select element
 					for (i=0; i<data_obj.cat.length; i++){
 							if (i==0) {
-									$('<option>').attr({'value':data_obj.cat[i]}).attr('selected', true).html(data_obj.cat[i]).appendTo('#page_add_entry select#select_cat');
+									$('<option>').attr({'value':data_obj.cat[i]}).attr('selected', true).html(data_obj.cat[i]).appendTo('#page_cat_edit select#select_cat');
 							}
 							else {
-									$('<option>').attr({'value':data_obj.cat[i]}).html(data_obj.cat[i]).appendTo('#page_add_entry select#select_cat');
+									$('<option>').attr({'value':data_obj.cat[i]}).html(data_obj.cat[i]).appendTo('#page_cat_edit select#select_cat');
 							}
 					}
 			    // Enhance new select element
-					//$('#page_add_entry select#select_cat').val($("#page_add_entry select#select_cat option:first").val());;
-			    $('#page_add_entry select#select_cat').selectmenu()
+					//$('#page_cat_edit select#select_cat').val($("#page_cat_edit select#select_cat option:first").val());;
+			    $('#page_cat_edit select#select_cat').selectmenu()
 
 			});
-			$('#page_add_entry')
+			$('#page_cat_edit')
+					.on( 'change', 'select', function(event){
+							$('#page_cat_edit #grid_pocket_smry').show();
+							$('#page_cat_edit #grid_pocket_dtls').hide();
+							$('#page_cat_edit #grid_coin_smry').hide();
+							$('#page_cat_edit #grid_pocket_add').hide();
+					})
 					.on( 'pageshow', function ( event, ui) {
-
+							$('#page_cat_edit #grid_pocket_smry').show();
+							$('#page_cat_edit #grid_pocket_dtls').hide();
+							$('#page_cat_edit #grid_coin_smry').hide();
+							$('#page_cat_edit #grid_pocket_add').hide();
+					})
+					.on('vclick','#btn_pkt_smry', function(event){
+							$('#page_cat_edit #grid_pocket_smry').show();
+							$('#page_cat_edit #grid_pocket_dtls').hide();
+							$('#page_cat_edit #grid_coin_smry').hide();
+							$('#page_cat_edit #grid_pocket_add').hide();
+					})
+					.on('vclick','#btn_pkt_dtls', function(event){
+							$('#page_cat_edit #grid_pocket_smry').hide();
+							$('#page_cat_edit #grid_pocket_dtls').show();
+							$('#page_cat_edit #grid_coin_smry').hide();
+							$('#page_cat_edit #grid_pocket_add').hide();
+					})
+					.on('vclick','#btn_coin_smry', function(event){
+							$('#page_cat_edit #grid_pocket_smry').hide();
+							$('#page_cat_edit #grid_pocket_dtls').hide();
+							$('#page_cat_edit #grid_coin_smry').show();
+							$('#page_cat_edit #grid_pocket_add').hide();
+					})
+					.on('vclick','#btn_pkt_add', function(event){
+							$('#page_cat_edit #grid_pocket_smry').hide();
+							$('#page_cat_edit #grid_pocket_dtls').hide();
+							$('#page_cat_edit #grid_coin_smry').hide();
+							$('#page_cat_edit #grid_pocket_add').show();
 					})
 					.on('vclick','#btn_add_entry', function(event){
-
 					})
 					.on('vclick','#btn_reset_all', function(event){
 
@@ -123,13 +155,11 @@
 		<ulx data-role="listview" data-ajax="false" data-inset="true" data-theme="d" />
 		<ul data-role="listview" data-inset="true">
     		<li data-role="list-divider">Views</li>
-				<li><a href="#page_view_by_cat">View by Cat</a></li>
-				<li><a href="#page_view_by_bankin">View by BankIn</a></li>
-				<li><a href="#page_view_by_givingbag">View by GivingBag</a></li>
-				<li data-role="list-divider">Entries</li>
+				<li><a href="#page_cat_edit">Category (Edit)</a></li>
+				<li><a href="#page_view_cat">View by Category</a></li>
+				<li><a href="#page_view_bankin">View by BankIn</a></li>
+				<li><a href="#page_view_givingbag">View by GivingBag</a></li>
 				<li><a href="#page_manage_data">Manage All</a></li>
-				<li><a href="#page_add_entry">Add Entries</a></li>
-				<li><a href-"#page_del_entry">Delete Entries</a></li>
 		</ul>
 	</div><!-- /content -->
 
@@ -175,8 +205,8 @@
 </div><!-- /page manage data-->
 
 
-<!-- Start of page_add_entry page -->
-<div data-role="page" id="page_add_entry">
+<!-- Start of page_cat_edit page -->
+<div data-role="page" id="page_cat_edit">
 
 	<div data-role="header">
 		<h1>Add Entry</h1>
@@ -185,36 +215,50 @@
 	<div role="main" class="ui-content">
     <select name="select_cat" id="select_cat">
     </select>
-		<div class="ui-grid-d">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+				<button id="btn_pkt_smry">Pocket Summary</button>
+				<button id="btn_pkt_dtls">Pocket Details</button>
+				<button id="btn_coin_smry">Coin Summary</button>
+				<button id="btn_pkt_add">Pocket Add</button>
+    </fieldset>
+
+
+		<div id="grid_pocket_smry" class="ui-grid-b">
+				<legend>Pocket Summary:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
-		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+		</div><!-- /grid_pocket_smry -->
+		<div id="grid_pocket_dtls" class="ui-grid-a">
+				<legend>Pocket Details:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
 				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-d"><div ><input type="button" value="Delete"></div></div>
+		</div><!-- /grid_pocket_dtls -->
+		<div id="grid_coin_smry" class="ui-grid-b">
+				<legend>Coins Details:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
-		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
-				<div class="ui-block-d"><div ><input type="button" value="Hmm"></div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
 		</div><!-- /grid-c -->
 		<p> Add Entry </p>
-		<div class="ui-grid-b">
+		<div id="grid_pocket_add" class="ui-grid-b">
+				<legend>Add Pocket:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
-		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
-						<input type="button" data-inline="true" value="--">
-						<input type="button" data-inline="true" value="-">
-						<span>12</span>
-						<input type="button" data-inline="true" value="+">
-						<input type="button" data-inline="true" value="++">
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" value="2">
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$500</div></div>
-		    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
-						<input type="button" data-inline="true" value="--">
-						<input type="button" data-inline="true" value="-">
-						<span>12</span>
-						<input type="button" data-inline="true" value="+">
-						<input type="button" data-inline="true" value="++">
-				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
 		</div><!-- /grid-c -->
 
 		<button data-inline="true" id='btn_add_entry'>Add Entry</button>
@@ -224,7 +268,7 @@
 	<div data-role="footer">
 		<h4><a href="#page_main">Back to main</a></h4>
 	</div><!-- /footer -->
-</div><!-- /page page_add_entry -->
+</div><!-- /page page_cat_edit -->
 
 </body>
 </html>
