@@ -42,7 +42,13 @@
 
 	function getDefaultData(){return{
 			"cat":["早堂","午堂","堂費","感恩","青年","兒童","長者"]
-			, "pocket":[]
+			, "早堂":[]
+			, "午堂":[]
+			, "堂費":[]
+			, "感恩":[]
+			, "青年":[]
+			, "兒童":[]
+			, "長者":[]
 	};}
 
 	data_obj={};
@@ -108,14 +114,17 @@
 					.on( 'pageshow', function ( event, ui) {
 							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_smry').show();
+							refreshCatSmry();
 					})
 					.on('vclick','#btn_pkt_smry', function(event){
 							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_smry').show();
+							refreshCatSmry();
 					})
 					.on('vclick','#btn_pkt_dtls', function(event){
 							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_dtls').show();
+							refreshCatDtls();
 					})
 					.on('vclick','#btn_coin_smry', function(event){
 							clearCatEdit();
@@ -126,49 +135,65 @@
 							$('#page_cat_edit #grid_pocket_add').show();
 					})
 					.on('change', '#grid_pocket_add #coin_1000_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_1000_total').text($('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val() * 1000) ;
-					})
-					.on('change', '#grid_pocket_add #coin_500_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_500_total').text($('#page_cat_edit #grid_pocket_add #coin_500_cnt').val() * 500) ;
-					})
-					.on('change', '#grid_pocket_add #coin_100_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_100_total').text($('#page_cat_edit #grid_pocket_add #coin_100_cnt').val() * 100) ;
-					})
-					.on('change', '#grid_pocket_add #coin_50_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_50_total').text($('#page_cat_edit #grid_pocket_add #coin_50_cnt').val() * 50) ;
-					})
-					.on('change', '#grid_pocket_add #coin_20_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_20_total').text($('#page_cat_edit #grid_pocket_add #coin_20_cnt').val() * 20) ;
-					})
-					.on('change', '#grid_pocket_add #coin_10_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_10_total').text($('#page_cat_edit #grid_pocket_add #coin_10_cnt').val() * 10) ;
-					})
-					.on('change', '#grid_pocket_add #coin_10c_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_10c_total').text($('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val() * 10) ;
-					})
-					.on('change', '#grid_pocket_add #coin_5_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_5_total').text($('#page_cat_edit #grid_pocket_add #coin_5_cnt').val() * 5) ;
-					})
-					.on('change', '#grid_pocket_add #coin_2_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_2_total').text($('#page_cat_edit #grid_pocket_add #coin_2_cnt').val() * 2) ;
-					})
-					.on('change', '#grid_pocket_add #coin_1_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_1_total').text($('#page_cat_edit #grid_pocket_add #coin_1_cnt').val() * 1) ;
-					})
-					.on('change', '#grid_pocket_add #coin_05_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_05_total').text($('#page_cat_edit #grid_pocket_add #coin_05_cnt').val() * 0.5) ;
-					})
-					.on('change', '#grid_pocket_add #coin_02_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_02_total').text($('#page_cat_edit #grid_pocket_add #coin_02_cnt').val() * 0.2) ;
-					})
-					.on('change', '#grid_pocket_add #coin_01_cnt', function(event){
-							$('#page_cat_edit #grid_pocket_add #coin_01_total').text($('#page_cat_edit #grid_pocket_add #coin_01_cnt').val() * 0.1) ;
-					})
-					.on('vclick','#btn_add_entry', function(event){
 							refreshCatEdit();
 					})
-					.on('vclick','#btn_reset_all', function(event){
+					.on('change', '#grid_pocket_add #coin_500_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_100_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_50_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_20_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_10_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_10c_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_5_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_2_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_1_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_05_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_02_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_01_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_cheque_cnt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_cheque_amt', function(event){
+							refreshCatEdit();
+					})
+					.on('change', '#grid_pocket_add #coin_prepaid_amt', function(event){
+							refreshCatEdit();
+					})
 
+					.on('vclick','#btn_add_entry', function(event){
+							var entry = refreshCatEdit();
+							addPocketCatEntry(entry);
+							saveStorage(data_obj);
+							alert('Pocket Added!')
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_add').show();
+					})
+					.on('vclick','#btn_reset_all', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_add').show();
 					})
 	});
 
@@ -184,26 +209,27 @@
 			var entry = {
 					"cat":$('#page_cat_edit select#select_cat').val()
 					, "coins":[
-							$('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_500_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_100_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_50_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_20_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_10_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_5_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_2_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_1_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_05_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_02_cnt').val()
-						,	$('#page_cat_edit #grid_pocket_add #coin_01_cnt').val()
+							$('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_500_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_100_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_50_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_20_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_10_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_5_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_2_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_1_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_05_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_02_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_01_cnt').val() * 1
 					]
-					, "cheque_cnt":0
-					, "cheque_amt":0
-					, "prepaid_amt":0
+					, "cheque_cnt":$('#page_cat_edit #grid_pocket_add #coin_cheque_cnt').val() * 1
+					, "cheque_amt":$('#page_cat_edit #grid_pocket_add #coin_cheque_amt').val() * 1
+					, "prepaid_amt":$('#page_cat_edit #grid_pocket_add #coin_prepaid_amt').val() * 1
 					, "total":0
 			};
-			entry.total = entry.coins[0]*1000
+			entry.total = 0
+			 						+ entry.coins[0]*1000
 									+ entry.coins[1]*500
 									+ entry.coins[2]*100
 									+ entry.coins[3]*50
@@ -215,11 +241,94 @@
 									+ entry.coins[9]*1
 									+ entry.coins[10]*0.5
 									+ entry.coins[11]*0.2
-									+ entry.coins[12]*0.1;
+									+ entry.coins[12]*0.1
+									+ entry.prepaid_amt * 1
+									+ entry.cheque_amt * 1;
+
+			$('#page_cat_edit #grid_pocket_add #coin_1000_total' ).text(entry.coins[0]  * 1000) ;
+			$('#page_cat_edit #grid_pocket_add #coin_500_total'  ).text(entry.coins[1]  * 500) ;
+			$('#page_cat_edit #grid_pocket_add #coin_100_total'  ).text(entry.coins[2]  * 100) ;
+			$('#page_cat_edit #grid_pocket_add #coin_50_total'   ).text(entry.coins[3]  * 50) ;
+			$('#page_cat_edit #grid_pocket_add #coin_20_total'   ).text(entry.coins[4]  * 20) ;
+			$('#page_cat_edit #grid_pocket_add #coin_10_total'   ).text(entry.coins[5]  * 10) ;
+			$('#page_cat_edit #grid_pocket_add #coin_10c_total'  ).text(entry.coins[6]  * 10) ;
+			$('#page_cat_edit #grid_pocket_add #coin_5_total'    ).text(entry.coins[7]  * 5) ;
+			$('#page_cat_edit #grid_pocket_add #coin_2_total'    ).text(entry.coins[8]  * 2) ;
+			$('#page_cat_edit #grid_pocket_add #coin_1_total'    ).text(entry.coins[9]  * 1) ;
+			$('#page_cat_edit #grid_pocket_add #coin_05_total'   ).text(entry.coins[10] * 0.5) ;
+			$('#page_cat_edit #grid_pocket_add #coin_02_total'   ).text(entry.coins[11] * 0.2) ;
+			$('#page_cat_edit #grid_pocket_add #coin_01_total'   ).text(entry.coins[12] * 0.1) ;
+			$('#page_cat_edit #grid_pocket_add #coin_prepaid_total').text(entry.prepaid_amt);
+			$('#page_cat_edit #grid_pocket_add #coin_cheque_total' ).text(entry.cheque_amt);
+			$('#page_cat_edit #grid_pocket_add #coin_total_amt'    ).text(entry.total);
 			//alert(window.JSON.stringify(entry));
-			data_obj.pocket.splice(0,0,window.JSON.parse(window.JSON.stringify(entry)));
+			//data_obj.pocket.splice(0,0,window.JSON.parse(window.JSON.stringify(entry)));
+			return entry;
 
 	}
+	function addPocketCatEntry(entry) {
+			li_pointer = 0;
+			for (li_row=0; li_row<data_obj[entry.cat].length; li_row++) {
+					if (data_obj[entry.cat][li_row].total <= entry.total) {
+							li_pointer = li_row+1;
+					}
+			}
+
+			data_obj[entry.cat].splice(li_pointer,0,window.JSON.parse(window.JSON.stringify(entry)));
+	}
+
+	function refreshCatSmry() {
+			$('#page_cat_edit #grid_pocket_smry').html('');
+			$('<legend>Pocket Summary:</legend>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+			li_cnt = 0;
+			ld_total = 0;
+			ld_last_total = 0;
+			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
+					if (li_cnt>0 && ld_last_total != list_of_pocket[li_row].total) {
+							$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_last_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cnt+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							li_cnt=0;
+							li_total=0;
+							ld_last_total = list_of_pocket[li_row].total;
+					}
+					if (li_cnt==0 || ld_last_total == list_of_pocket[li_row].total) {
+							li_cnt++;
+							ld_last_total = list_of_pocket[li_row].total;
+							ld_total = ld_total + ld_last_total;
+					}
+			}
+			if (li_cnt>0) {
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_last_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cnt+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			}
+	}
+
+	function refreshCatDtls(){
+			$('#page_cat_edit #grid_pocket_dtls').html('');
+			$('<legend>Pocket Details:</legend>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Details</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+
+			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+list_of_pocket[li_row].total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+1+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="button" value="Delete"></div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			}
+	}
+
+
 	</script>
 </head>
 <body>
@@ -289,7 +398,7 @@
 <div data-role="page" id="page_cat_edit">
 
 	<div data-role="header">
-		<h1>Add Entry</h1>
+		<h1>Category (Edit)</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -312,12 +421,14 @@
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
 		</div><!-- /grid_pocket_smry -->
-		<div id="grid_pocket_dtls" class="ui-grid-a">
+		<div id="grid_pocket_dtls" class="ui-grid-b">
 				<legend>Pocket Details:</legend>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
-				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Details</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
-				<div class="ui-block-d"><div ><input type="button" value="Delete"></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">1000x1</div></div>
+				<div class="ui-block-c"><div ><input type="button" value="Delete"></div></div>
 		</div><!-- /grid_pocket_dtls -->
 		<div id="grid_coin_smry" class="ui-grid-b">
 				<legend>Coins Summary:</legend>
@@ -424,6 +535,27 @@
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
 						<span class="coin_total" id="coin_01_total"><span>
 				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_prepaid_amt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_prepaid_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">Cheque</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+						<input type="number" data-inline="true" id="coin_cheque_cnt" value="">
+						<input type="number" data-inline="true" id="coin_cheque_amt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+						<span class="coin_total" id="coin_cheque_total"><span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_total_amt"><span>
+				</div></div>
+
 				<button data-inline="true" id='btn_add_entry'>Add Entry</button>
 				<button data-inline="true" id='btn_reset_all'>Reset</button>
 		</div><!-- /grid-c -->
