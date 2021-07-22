@@ -128,6 +128,7 @@
 					.on('vclick','#btn_coin_smry', function(event){
 							clearCatEdit();
 							$('#page_cat_edit #grid_coin_smry').show();
+							refreshCatCoinSmry();
 					})
 					.on('vclick','#btn_pkt_add', function(event){
 							clearCatEdit();
@@ -349,6 +350,48 @@
 	function deletePocket(ps_cat, pi_index) {
 			data_obj[ps_cat].splice(pi_index,1);
 			refreshCatDtls();
+	}
+	function refreshCatCoinSmry(){
+			$('#page_cat_edit #grid_coin_smry').html('');
+			$('<legend>Coins Summary:</legend>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+
+			var lo_coin_desc=["1000","500", "100", "50", "20", "10", "10c", "5", "2", "1", "0.5", "0.2", "0.1"];
+			var lo_cat_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									lo_all_coin[li_i] += lo_coins[li_i];
+									if (ls_current_cat == cat) {
+											lo_cat_coin[li_i] += lo_coins[li_i];
+									}
+							}
+					}
+			}
+			for (li_i=0; li_i<13; li_i++){
+					if (lo_all_coin[li_i]>0) {
+							$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+							$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_cat_coin[li_i]+'('+lo_all_coin[li_i]+')</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]*lo_cat_coin[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+					}
+			}
+			/*
+			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
+					if (list_of_pocket[li_row].coins[0]>0) {ls_desc+=' 1000x'+list_of_pocket[li_row].coins[0];}
+					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+					<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+			}*/
+
 	}
 
 
