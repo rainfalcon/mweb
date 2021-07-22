@@ -194,7 +194,15 @@
 					.on('vclick','#btn_reset_all', function(event){
 							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_add').show();
-					})
+					});
+			$('#page_view_cat')
+					.on( 'pageshow', function ( event, ui) {
+							refreshAllCatSmry();
+					});
+			$('#page_view_bankin')
+					.on ( 'pageshow', function( event, ui) {
+							refreshBankIn();
+					});
 	});
 
 	function clearCatEdit(){
@@ -384,13 +392,109 @@
 							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]*lo_cat_coin[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
 					}
 			}
-			/*
-			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
-					if (list_of_pocket[li_row].coins[0]>0) {ls_desc+=' 1000x'+list_of_pocket[li_row].coins[0];}
-					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
-					<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
-			}*/
+
+	}
+	function refreshAllCatSmry(){
+			$('#page_view_cat #grid_cat_smry').html('');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cat</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Cash</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+			var lo_coin_value=[1000,500, 100, 50, 20, 10, 10, 5, 2, 1, 0.5, 0.2, 0.1];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var ld_grand_prepaid=0;
+			var ld_grand_cheque=0;
+			var ld_grand_coin=0;
+			var ld_grand_total=0;
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					ld_coin_amt=0;
+					ld_prepaid_amt=0;
+					ld_cheque_amt=0;
+					ld_cheque_cnt=0;
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									ld_coin_amt += lo_coin_value[li_i] * lo_coins[li_i];
+							}
+							ld_prepaid_amt += data_obj[ls_current_cat][li_pidx].prepaid_amt;
+							ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+							ld_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+					}
+					ld_total=ld_prepaid_amt+ld_cheque_amt+ld_coin_amt;
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ls_current_cat+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_prepaid_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_coin_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+					ld_grand_prepaid += ld_prepaid_amt;
+					ld_grand_cheque  += ld_cheque_amt;
+					ld_grand_coin    += ld_coin_amt;
+					ld_grand_total   += ld_total;
+
+			}
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_coin+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+
+	};
+
+	function refreshBankIn(){
+			$('#page_view_bankin #grid_bankin_smry').html('');
+
+			$('<legend>Bank-in Summary:</legend>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Coins</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+
+
+			var lo_coin_value=[1000,500, 100, 50, 20, 10, 10, 5, 2, 1, 0.5, 0.2, 0.1];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var lo_all_coin_value=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var ld_cheque_amt=0;
+			var ld_cheque_cnt=0;
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									lo_all_coin[li_i] += lo_coins[li_i];
+									lo_all_coin_value[li_i] += lo_coin_value[li_i] * lo_coins[li_i];
+							}
+							ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+							ld_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+					}
+			}
+
+			var ld_grand_total=0;
+			for (li_i=0; li_i<13; li_i++){
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_value[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_all_coin[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_all_coin_value[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+
+					ld_grand_total += lo_all_coin_value[li_i];
+			}
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_cnt+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			ld_grand_total += ld_cheque_amt;
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
 
 	}
 
@@ -628,10 +732,71 @@
 
 	</div><!-- /content -->
 
+
 	<div data-role="footer">
 		<h4><a href="#page_main">Back to main</a></h4>
 	</div><!-- /footer -->
 </div><!-- /page page_cat_edit -->
 
+<!-- Start of page_view_cat page -->
+<div data-role="page" id="page_view_cat">
+
+	<div data-role="header">
+		<h1>View by Category</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="grid_cat_smry" class="ui-grid-d">
+				<legend>Category Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cat</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>
+				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Cash</div></div>
+				<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Morning</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">0</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">500</div></div>
+				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">1500</div></div>
+				<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+		</div><!-- /grid_pocket_smry -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_view_cat -->
+
+
+
+<!-- Start of page_view_bankin page -->
+<div data-role="page" id="page_view_bankin">
+
+	<div data-role="header">
+		<h1>View by Bank-in</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="grid_bankin_smry" class="ui-grid-b">
+				<legend>Bank-in Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Coins</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+		</div><!-- /grid_pocket_smry -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_view_bankin -->
 </body>
 </html>
