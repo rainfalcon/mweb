@@ -106,10 +106,9 @@
 			});
 			$('#page_cat_edit')
 					.on( 'change', 'select', function(event){
+							clearCatEdit();
 							$('#page_cat_edit #grid_pocket_smry').show();
-							$('#page_cat_edit #grid_pocket_dtls').hide();
-							$('#page_cat_edit #grid_coin_smry').hide();
-							$('#page_cat_edit #grid_pocket_add').hide();
+							refreshCatSmry();
 					})
 					.on( 'pageshow', function ( event, ui) {
 							clearCatEdit();
@@ -323,9 +322,33 @@
 
 			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
 					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+list_of_pocket[li_row].total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
-					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+1+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
-					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><input type="button" value="Delete"></div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					ls_desc='';
+					if (list_of_pocket[li_row].coins[0]>0) {ls_desc+=' 1000x'+list_of_pocket[li_row].coins[0];}
+					if (list_of_pocket[li_row].coins[1]>0) {ls_desc+='  500x'+list_of_pocket[li_row].coins[1];}
+					if (list_of_pocket[li_row].coins[2]>0) {ls_desc+='  100x'+list_of_pocket[li_row].coins[2];}
+					if (list_of_pocket[li_row].coins[3]>0) {ls_desc+='   50x'+list_of_pocket[li_row].coins[3];}
+					if (list_of_pocket[li_row].coins[4]>0) {ls_desc+='   20x'+list_of_pocket[li_row].coins[4];}
+					if (list_of_pocket[li_row].coins[5]>0) {ls_desc+='   10x'+list_of_pocket[li_row].coins[5];}
+					if (list_of_pocket[li_row].coins[6]>0) {ls_desc+='  10cx'+list_of_pocket[li_row].coins[6];}
+					if (list_of_pocket[li_row].coins[7]>0) {ls_desc+='    5x'+list_of_pocket[li_row].coins[7];}
+					if (list_of_pocket[li_row].coins[8]>0) {ls_desc+='    2x'+list_of_pocket[li_row].coins[8];}
+					if (list_of_pocket[li_row].coins[9]>0) {ls_desc+='    1x'+list_of_pocket[li_row].coins[9];}
+					if (list_of_pocket[li_row].coins[10]>0) {ls_desc+='  0.5x'+list_of_pocket[li_row].coins[10];}
+					if (list_of_pocket[li_row].coins[11]>0) {ls_desc+='  0.2x'+list_of_pocket[li_row].coins[11];}
+					if (list_of_pocket[li_row].coins[12]>0) {ls_desc+='  0.1x'+list_of_pocket[li_row].coins[12];}
+					if (list_of_pocket[li_row].prepaid_amt>0) {ls_desc+='  prepaid '+list_of_pocket[li_row].prepaid_amt;}
+					if (list_of_pocket[li_row].cheque_amt >0) {ls_desc+='  cheque '+list_of_pocket[li_row].cheque_amt;}
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ls_desc+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">').appendTo('#page_cat_edit #grid_pocket_dtls');
+					//$('#page_cat_edit #grid_pocket_dtls').append('<button data-inline="true" onclick="alert(123);">Delete</button>').trigger('create');
+					//$('</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					ls_js = 'deletePocket(\''+cat+'\', '+li_row+');'
+					$('#page_cat_edit #grid_pocket_dtls').append('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><button data-inline="true" onclick="'+ls_js+'">Delete</button></div></div>').trigger('create');
 			}
+	}
+	function deletePocket(ps_cat, pi_index) {
+			data_obj[ps_cat].splice(pi_index,1);
+			refreshCatDtls();
 	}
 
 
