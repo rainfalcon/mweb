@@ -444,6 +444,9 @@
 
 			var lo_coin_value=[1000,500, 100, 50, 20, 10, 10, 5, 2, 1, 0.5, 0.2, 0.1];
 			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+      var ld_expense_coin=0;
+      
 			var ld_grand_prepaid=0;
 			var ld_grand_cheque=0;
 			var ld_grand_coin=0;
@@ -462,6 +465,11 @@
 							ld_prepaid_amt += data_obj[ls_current_cat][li_pidx].prepaid_amt;
 							ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
 							ld_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+              
+              if (ls_current_cat == "支出"){
+                  ld_expense_coin = ld_coin_amt;
+              }
+              
 					}
 					ld_total=ld_prepaid_amt+ld_cheque_amt+ld_coin_amt;
           ld_total = Math.round(ld_total * 1000) / 1000
@@ -478,6 +486,14 @@
 					ld_grand_total   += ld_total;
 
 			}
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand(no expense)</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+      ld_grand_coin = Math.round(ld_grand_coin * 1000) / 1000
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_coin-ld_expense_coin'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+      ld_grand_total = Math.round(ld_grand_total * 1000) / 1000
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total-ld_expense_coin+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 
 			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
