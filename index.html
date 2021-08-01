@@ -487,20 +487,19 @@
 
 			}
 
+      ld_grand_coin = Math.round(ld_grand_coin * 1000) / 1000;
+      ld_grand_total = Math.round(ld_grand_total * 1000) / 1000;
+      
 			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand(no expense)</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
-      ld_grand_coin = Math.round(ld_grand_coin * 1000) / 1000
-			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_coin-ld_expense_coin'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
-      ld_grand_total = Math.round(ld_grand_total * 1000) / 1000
-			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total-ld_expense_coin+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+(ld_grand_coin-ld_expense_coin)+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+(ld_grand_total-ld_expense_coin)+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 
 			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
-      ld_grand_coin = Math.round(ld_grand_coin * 1000) / 1000
 			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_coin+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
-      ld_grand_total = Math.round(ld_grand_total * 1000) / 1000
 			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
 
 
