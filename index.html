@@ -411,6 +411,8 @@
 			var lo_coin_value=["1000","500", "100", "50", "20", "10", "10", "5", "2", "1", "0.5", "0.2", "0.1"];
 			var lo_cat_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+      var li_cheque_cnt=0;
+      var ld_cheque_amt=0;
 
 			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
 					ls_current_cat = data_obj.cat[li_cidx];
@@ -422,6 +424,10 @@
 											lo_cat_coin[li_i] += lo_coins[li_i];
 									}
 							}
+              if (ls_current_cat == cat) {
+                  li_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+                  ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+              }
 					}
 			}
 			for (li_i=0; li_i<13; li_i++){
@@ -432,6 +438,9 @@
 							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_row_total+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
 					}
 			}
+      $('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+      $('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cheque_cnt+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+      $('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
 
 	}
 	function refreshAllCatSmry(){
