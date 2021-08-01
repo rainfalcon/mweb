@@ -408,6 +408,7 @@
 			var list_of_pocket = data_obj[cat];
 
 			var lo_coin_desc=["1000","500", "100", "50", "20", "10", "10c", "5", "2", "1", "0.5", "0.2", "0.1"];
+			var lo_coin_value=["1000","500", "100", "50", "20", "10", "10", "5", "2", "1", "0.5", "0.2", "0.1"];
 			var lo_cat_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -427,7 +428,7 @@
 					if (lo_all_coin[li_i]!=0 || lo_cat_coin[li_i]!=0) {
 							$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
 							$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_cat_coin[li_i]+'('+lo_all_coin[li_i]+')</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
-							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]*lo_cat_coin[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_value[li_i]*lo_cat_coin[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
 					}
 			}
 
