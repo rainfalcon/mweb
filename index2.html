@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MWeb</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<style>
+		legend{
+			font-size: 1.5em;
+			font-weight: bold;
+			padding-left: 0.5em;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script>
+	//Credit: http://diveintohtml5.org/storage.html
+	function supports_html5_storage() {
+	  try {
+	    return 'localStorage' in window && window['localStorage'] !== null;
+	  } catch (e) {
+	    return false;
+	  }
+	}
+	function supports_json() {
+	  try {
+	    return 'JSON' in window && window['JSON'] !== null;
+	  } catch (e) {
+	    return false;
+	  }
+	}
+
+	//save storage
+	storage_data_label='mweb2.rainfalcon.github.io';
+	function saveStorage(data){
+			console.log("To store...");
+			console.dir(data);
+			localStorage[storage_data_label] = window.JSON.stringify(data);
+	}
+	//loading from storage
+	function getStorage(){
+			var current = localStorage[storage_data_label];
+			var data = {};
+			if(typeof current != "undefined") data=window.JSON.parse(current);
+			return data;
+	}
+
+	function getDefaultData(){return{
+			"cat":["早堂","午堂","早堂2","午堂2"
+						,"堂費","感恩", "聖誕／復活感恩","兒童","青年","長者"
+						,"差傳","代收", "神學培才", "慈惠","佈道"
+						,"愛基","愛租","愛鄰收入","裝備"
+						,"其他","找換"
+						,"支出"]
+			, "早堂":[]
+			, "午堂":[]
+			, "早堂2":[]
+			, "午堂2":[]
+			, "堂費":[]
+			, "感恩":[]
+			, "聖誕／復活感恩":[]
+			, "兒童":[]
+			, "青年":[]
+			, "長者":[]
+			, "差傳":[]
+			, "代收":[]
+			, "神學培才":[]
+			, "慈惠":[]
+			, "佈道":[]
+			, "愛基":[]
+			, "愛租":[]
+			, "愛鄰收入":[]
+			, "裝備":[]
+			, "其他":[]
+			, "找換":[]
+			, "支出":[]
+
+	};}
+
+	data_obj={};
+	$(document).ready(function(){
+			if (!supports_json() || !supports_html5_storage()) {
+					alert('Browser not support json or storage!');
+					return;
+			}
+			else {
+					data_obj = getStorage();
+
+			}
+			//load data from storage
+			data_obj=getStorage();
+			if(data_obj=={}) {
+					data_obj=getDefaultData();
+			}
+
+			$('#page_main').on( "pageshow", function( event, ui ) {
+					//alert( "This page was just shown xxx "  );
+			});
+
+			$('#page_manage_data')
+					.on( "pageshow", function( event, ui ) {
+							data_str=window.JSON.stringify(data_obj);
+							$('#page_manage_data #textarea_data').text(data_str);
+					})
+					.on('vclick','#btn_copy_clip', function(event){
+						  $('#page_manage_data #textarea_data').select();
+						  document.execCommand('copy');
+							$("textarea").select();
+					})
+					.on('vclick','#btn_clear_all', function(event){
+							data_obj=getDefaultData();
+							data_str=window.JSON.stringify(data_obj);
+							$('#page_manage_data #textarea_data').val(data_str);
+					})
+					.on('vclick','#btn_load_data', function(event){
+							data_str=$('#page_manage_data #textarea_data').val();
+							data_obj=window.JSON.parse(data_str);
+							saveStorage(data_obj);
+							//data_str=window.JSON.stringify(data_obj);
+							//$('#page_manage_data #textarea_data').text(data_str);
+					});
+
+			$(document).on('pagebeforecreate', '#page_cat_edit', function(){
+			    // Add a new select element
+					for (i=0; i<data_obj.cat.length; i++){
+							if (i==0) {
+									$('<option>').attr({'value':data_obj.cat[i]}).attr('selected', true).html(data_obj.cat[i]).appendTo('#page_cat_edit select#select_cat');
+							}
+							else {
+									$('<option>').attr({'value':data_obj.cat[i]}).html(data_obj.cat[i]).appendTo('#page_cat_edit select#select_cat');
+							}
+					}
+			    // Enhance new select element
+					//$('#page_cat_edit select#select_cat').val($("#page_cat_edit select#select_cat option:first").val());;
+			    $('#page_cat_edit select#select_cat').selectmenu()
+
+			});
+			$('#page_cat_edit')
+					.on( 'change', 'select', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_smry').show();
+							refreshCatSmry();
+					})
+					.on( 'pageshow', function ( event, ui) {
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_smry').show();
+							refreshCatSmry();
+					})
+					.on('vclick','#btn_pkt_smry', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_smry').show();
+							refreshCatSmry();
+					})
+					.on('vclick','#btn_pkt_dtls', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_dtls').show();
+							refreshCatDtls();
+					})
+					.on('vclick','#btn_coin_smry', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_coin_smry').show();
+							refreshCatCoinSmry();
+					})
+					.on('vclick','#btn_pkt_add', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_add').show();
+							refreshCatEdit();
+					})
+					.on('click','#grid_pocket_add #btn_coin_1000_cnt_add', function(event){addCount('#grid_pocket_add #coin_1000_cnt',+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_500_cnt_add' , function(event){addCount('#grid_pocket_add #coin_500_cnt' ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_100_cnt_add' , function(event){addCount('#grid_pocket_add #coin_100_cnt' ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_50_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_50_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_20_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_20_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_10_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_10_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_10c_cnt_add' , function(event){addCount('#grid_pocket_add #coin_10c_cnt' ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_5_cnt_add'   , function(event){addCount('#grid_pocket_add #coin_5_cnt'   ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_2_cnt_add'   , function(event){addCount('#grid_pocket_add #coin_2_cnt'   ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_1_cnt_add'   , function(event){addCount('#grid_pocket_add #coin_1_cnt'   ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_05_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_05_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_02_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_02_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_01_cnt_add'  , function(event){addCount('#grid_pocket_add #coin_01_cnt'  ,+1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_1000_cnt_minus', function(event){addCount('#grid_pocket_add #coin_1000_cnt',-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_500_cnt_minus' , function(event){addCount('#grid_pocket_add #coin_500_cnt' ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_100_cnt_minus' , function(event){addCount('#grid_pocket_add #coin_100_cnt' ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_50_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_50_cnt'  ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_20_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_20_cnt'  ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_10_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_10_cnt'  ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_10c_cnt_minus' , function(event){addCount('#grid_pocket_add #coin_10c_cnt' ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_5_cnt_minus'   , function(event){addCount('#grid_pocket_add #coin_5_cnt'   ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_2_cnt_minus'   , function(event){addCount('#grid_pocket_add #coin_2_cnt'   ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_1_cnt_minus'   , function(event){addCount('#grid_pocket_add #coin_1_cnt'   ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_05_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_05_cnt'  ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_02_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_02_cnt'  ,-1);refreshCatEdit();})
+					.on('click','#grid_pocket_add #btn_coin_01_cnt_minus'  , function(event){addCount('#grid_pocket_add #coin_01_cnt'  ,-1);refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_1000_cnt', function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_500_cnt' , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_100_cnt' , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_50_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_20_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_10_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_10c_cnt' , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_5_cnt'   , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_2_cnt'   , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_1_cnt'   , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_05_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_02_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_01_cnt'  , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_cheque_cnt' , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_cheque_amt' , function(event){refreshCatEdit();})
+					.on('change', '#grid_pocket_add #coin_prepaid_amt', function(event){refreshCatEdit();})
+					.on('vclick','#btn_add_entry', function(event){
+							var entry = refreshCatEdit();
+							addPocketCatEntry(entry);
+							saveStorage(data_obj);
+							alert('Pocket Added!')
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_add').show();
+							refreshCatEdit();
+					})
+					.on('vclick','#btn_reset_all', function(event){
+							clearCatEdit();
+							$('#page_cat_edit #grid_pocket_add').show();
+					});
+			$('#page_view_cat')
+					.on( 'pageshow', function ( event, ui) {
+							refreshAllCatSmry();
+					});
+			$('#page_view_bankin')
+					.on ( 'pageshow', function( event, ui) {
+							refreshBankIn();
+					});
+	});
+
+	function addCount(countID, op){
+		var ls_count = $(countID).val() * 1 + op;
+		$(countID).val(ls_count);
+	}
+
+	function clearCatEdit(){
+			$('#page_cat_edit #grid_pocket_smry').hide();
+			$('#page_cat_edit #grid_pocket_dtls').hide();
+			$('#page_cat_edit #grid_coin_smry').hide();
+			$('#page_cat_edit #grid_pocket_add').hide();
+			$('#page_cat_edit #grid_pocket_add input').val('');
+			$('#page_cat_edit #grid_pocket_add .coin_total').text('');
+	}
+	function refreshCatEdit(){
+			var entry = {
+					"cat":$('#page_cat_edit select#select_cat').val()
+					, "coins":[
+							$('#page_cat_edit #grid_pocket_add #coin_1000_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_500_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_100_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_50_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_20_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_10_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_10c_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_5_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_2_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_1_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_05_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_02_cnt').val() * 1
+						,	$('#page_cat_edit #grid_pocket_add #coin_01_cnt').val() * 1
+					]
+					, "cheque_cnt":$('#page_cat_edit #grid_pocket_add #coin_cheque_cnt').val() * 1
+					, "cheque_amt":$('#page_cat_edit #grid_pocket_add #coin_cheque_amt').val() * 1
+					, "prepaid_amt":$('#page_cat_edit #grid_pocket_add #coin_prepaid_amt').val() * 1
+					, "total":0
+			};
+			entry.total = 0
+			 						+ entry.coins[0]*1000
+									+ entry.coins[1]*500
+									+ entry.coins[2]*100
+									+ entry.coins[3]*50
+									+ entry.coins[4]*20
+									+ entry.coins[5]*10
+									+ entry.coins[6]*10
+									+ entry.coins[7]*5
+									+ entry.coins[8]*2
+									+ entry.coins[9]*1
+									+ entry.coins[10]*0.5
+									+ entry.coins[11]*0.2
+									+ entry.coins[12]*0.1
+									+ entry.prepaid_amt * 1
+									+ entry.cheque_amt * 1;
+			entry.total = entry.total.toFixed(2);
+
+			$('#page_cat_edit #grid_pocket_add #coin_1000_total' ).text((entry.coins[0]  * 1000).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_500_total'  ).text((entry.coins[1]  * 500 ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_100_total'  ).text((entry.coins[2]  * 100 ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_50_total'   ).text((entry.coins[3]  * 50  ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_20_total'   ).text((entry.coins[4]  * 20  ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_10_total'   ).text((entry.coins[5]  * 10  ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_10c_total'  ).text((entry.coins[6]  * 10  ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_5_total'    ).text((entry.coins[7]  * 5   ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_2_total'    ).text((entry.coins[8]  * 2   ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_1_total'    ).text((entry.coins[9]  * 1   ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_05_total'   ).text((entry.coins[10] * 0.5 ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_02_total'   ).text((entry.coins[11] * 0.2 ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_01_total'   ).text((entry.coins[12] * 0.1 ).toFixed(2) );
+			$('#page_cat_edit #grid_pocket_add #coin_prepaid_total').text(entry.prepaid_amt);
+			$('#page_cat_edit #grid_pocket_add #coin_cheque_total' ).text(entry.cheque_amt);
+			$('#page_cat_edit #grid_pocket_add #coin_total_amt'    ).text(entry.total);
+			//alert(window.JSON.stringify(entry));
+			//data_obj.pocket.splice(0,0,window.JSON.parse(window.JSON.stringify(entry)));
+
+			//update total coin
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									lo_all_coin[li_i] += lo_coins[li_i];
+							}
+					}
+			}
+			$('#page_cat_edit #grid_pocket_add #coin_1000_tcnt' ).text("(" + lo_all_coin[0]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_500_tcnt'  ).text("(" + lo_all_coin[1]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_100_tcnt'  ).text("(" + lo_all_coin[2]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_50_tcnt'   ).text("(" + lo_all_coin[3]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_20_tcnt'   ).text("(" + lo_all_coin[4]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_10_tcnt'   ).text("(" + lo_all_coin[5]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_10c_tcnt'  ).text("(" + lo_all_coin[6]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_5_tcnt'    ).text("(" + lo_all_coin[7]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_2_tcnt'    ).text("(" + lo_all_coin[8]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_1_tcnt'    ).text("(" + lo_all_coin[9]  + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_05_tcnt'   ).text("(" + lo_all_coin[10] + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_02_tcnt'   ).text("(" + lo_all_coin[11] + ")" );
+			$('#page_cat_edit #grid_pocket_add #coin_01_tcnt'   ).text("(" + lo_all_coin[12] + ")" );
+
+
+			return entry;
+
+	}
+	function addPocketCatEntry(entry) {
+			li_pointer = 0;
+			for (li_row=0; li_row<data_obj[entry.cat].length; li_row++) {
+					if (data_obj[entry.cat][li_row].total <= entry.total) {
+							li_pointer = li_row+1;
+					}
+			}
+
+			data_obj[entry.cat].splice(li_pointer,0,window.JSON.parse(window.JSON.stringify(entry)));
+	}
+
+	function refreshCatSmry() {
+			$('#page_cat_edit #grid_pocket_smry').html('');
+			$('<legend>Pocket Summary:</legend>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+			li_cnt = 0;
+			ld_total = 0;
+			ld_last_total = 0;
+			li_grand_cnt=0;
+			ld_grand_total=0;
+			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
+					if (li_cnt>0 && ld_last_total != list_of_pocket[li_row].total) {
+							$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_last_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cnt+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+							li_grand_cnt += li_cnt;
+							ld_grand_total += ld_total;
+							li_cnt=0;
+							ld_total=0;
+							ld_last_total = list_of_pocket[li_row].total;
+					}
+					if (li_cnt==0 || ld_last_total == list_of_pocket[li_row].total) {
+							li_cnt++;
+							ld_last_total = list_of_pocket[li_row].total;
+							ld_total = ld_total + ld_last_total;
+					}
+			}
+			if (li_cnt>0) {
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_last_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cnt+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+					ld_grand_total += ld_total;
+					li_grand_cnt += li_cnt;
+			}
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand Total</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_grand_cnt+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_smry');
+	}
+
+	function refreshCatDtls(){
+			$('#page_cat_edit #grid_pocket_dtls').html('');
+			$('<legend>Pocket Details:</legend>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Details</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+
+			for (li_row=0; li_row<list_of_pocket.length; li_row++) {
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+list_of_pocket[li_row].total+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					ls_desc='';
+					if (list_of_pocket[li_row].coins[0]!=0) {ls_desc+=' 1000x'+list_of_pocket[li_row].coins[0];}
+					if (list_of_pocket[li_row].coins[1]!=0) {ls_desc+='  500x'+list_of_pocket[li_row].coins[1];}
+					if (list_of_pocket[li_row].coins[2]!=0) {ls_desc+='  100x'+list_of_pocket[li_row].coins[2];}
+					if (list_of_pocket[li_row].coins[3]!=0) {ls_desc+='   50x'+list_of_pocket[li_row].coins[3];}
+					if (list_of_pocket[li_row].coins[4]!=0) {ls_desc+='   20x'+list_of_pocket[li_row].coins[4];}
+					if (list_of_pocket[li_row].coins[5]!=0) {ls_desc+='   10x'+list_of_pocket[li_row].coins[5];}
+					if (list_of_pocket[li_row].coins[6]!=0) {ls_desc+='  10cx'+list_of_pocket[li_row].coins[6];}
+					if (list_of_pocket[li_row].coins[7]!=0) {ls_desc+='    5x'+list_of_pocket[li_row].coins[7];}
+					if (list_of_pocket[li_row].coins[8]!=0) {ls_desc+='    2x'+list_of_pocket[li_row].coins[8];}
+					if (list_of_pocket[li_row].coins[9]!=0) {ls_desc+='    1x'+list_of_pocket[li_row].coins[9];}
+					if (list_of_pocket[li_row].coins[10]!=0) {ls_desc+='  0.5x'+list_of_pocket[li_row].coins[10];}
+					if (list_of_pocket[li_row].coins[11]!=0) {ls_desc+='  0.2x'+list_of_pocket[li_row].coins[11];}
+					if (list_of_pocket[li_row].coins[12]!=0) {ls_desc+='  0.1x'+list_of_pocket[li_row].coins[12];}
+					if (list_of_pocket[li_row].prepaid_amt!=0) {ls_desc+='  prepaid '+list_of_pocket[li_row].prepaid_amt;}
+					if (list_of_pocket[li_row].cheque_amt !=0) {ls_desc+='  cheque '+list_of_pocket[li_row].cheque_amt;}
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ls_desc+'</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">').appendTo('#page_cat_edit #grid_pocket_dtls');
+					//$('#page_cat_edit #grid_pocket_dtls').append('<button data-inline="true" onclick="alert(123);">Delete</button>').trigger('create');
+					//$('</div></div>').appendTo('#page_cat_edit #grid_pocket_dtls');
+					ls_js = 'deletePocket(\''+cat+'\', '+li_row+');'
+					$('#page_cat_edit #grid_pocket_dtls').append('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px"><button data-inline="true" onclick="'+ls_js+'">Delete</button></div></div>').trigger('create');
+			}
+	}
+	function deletePocket(ps_cat, pi_index) {
+			data_obj[ps_cat].splice(pi_index,1);
+			refreshCatDtls();
+	}
+	function refreshCatCoinSmry(){
+			$('#page_cat_edit #grid_coin_smry').html('');
+			$('<legend>Coins Summary:</legend>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+
+			var cat=$('#page_cat_edit select#select_cat').val();
+			var list_of_pocket = data_obj[cat];
+
+			var lo_coin_desc=["1000","500", "100", "50", "20", "10", "10c", "5", "2", "1", "0.5", "0.2", "0.1"];
+			var lo_coin_value=["1000","500", "100", "50", "20", "10", "10", "5", "2", "1", "0.5", "0.2", "0.1"];
+			var lo_cat_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+      var li_cheque_cnt=0;
+      var ld_cheque_amt=0;
+
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									lo_all_coin[li_i] += lo_coins[li_i];
+									if (ls_current_cat == cat) {
+											lo_cat_coin[li_i] += lo_coins[li_i];
+									}
+							}
+              if (ls_current_cat == cat) {
+                  li_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+                  ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+              }
+					}
+			}
+			for (li_i=0; li_i<13; li_i++){
+					if (lo_all_coin[li_i]!=0 || lo_cat_coin[li_i]!=0) {
+							$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_desc[li_i]+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+							$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_cat_coin[li_i]+'('+lo_all_coin[li_i]+')</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+              ld_row_total = Math.round(lo_coin_value[li_i]*lo_cat_coin[li_i] * 1000) / 1000
+							$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_row_total+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+					}
+			}
+      $('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+      $('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+li_cheque_cnt+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+      $('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_cat_edit #grid_coin_smry');
+
+	}
+	function refreshAllCatSmry(){
+			$('#page_view_cat #grid_cat_smry').html('');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cat</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Cash</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+			var lo_coin_value=[1000,500, 100, 50, 20, 10, 10, 5, 2, 1, 0.5, 0.2, 0.1];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+      var ld_expense_coin=0;
+
+			var ld_grand_prepaid=0;
+			var ld_grand_cheque=0;
+			var ld_grand_coin=0;
+			var ld_grand_total=0;
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					ld_coin_amt=0;
+					ld_prepaid_amt=0;
+					ld_cheque_amt=0;
+					ld_cheque_cnt=0;
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									ld_coin_amt += lo_coin_value[li_i] * lo_coins[li_i];
+							}
+							ld_prepaid_amt += data_obj[ls_current_cat][li_pidx].prepaid_amt;
+							ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+							ld_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+
+              if (ls_current_cat == "支出"){
+                  ld_expense_coin = ld_coin_amt;
+              }
+
+					}
+					ld_total=ld_prepaid_amt+ld_cheque_amt+ld_coin_amt;
+          ld_total = Math.round(ld_total * 1000) / 1000
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+ls_current_cat+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_prepaid_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+          ld_coin_amt = Math.round(ld_coin_amt * 1000) / 1000
+					$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_coin_amt+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+					$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_total+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+					ld_grand_prepaid += ld_prepaid_amt;
+					ld_grand_cheque  += ld_cheque_amt;
+					ld_grand_coin    += ld_coin_amt;
+					ld_grand_total   += ld_total;
+
+			}
+
+      ld_grand_coin = Math.round(ld_grand_coin * 1000) / 1000;
+      ld_grand_total = Math.round(ld_grand_total * 1000) / 1000;
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand(no expense)</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+(ld_grand_coin-ld_expense_coin)+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+(ld_grand_total-ld_expense_coin)+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_prepaid+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_cheque+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_coin+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+			$('<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_view_cat #grid_cat_smry');
+
+
+	};
+
+	function refreshBankIn(){
+			$('#page_view_bankin #grid_bankin_smry').html('');
+
+			$('<legend>Bank-in Summary:</legend>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Coins</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			//$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+
+
+			var lo_coin_value=[1000,500, 100, 50, 20, 10, 10, 5, 2, 1, 0.5, 0.2, 0.1];
+			var lo_all_coin=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var lo_all_coin_value=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var ld_cheque_amt=0;
+			var ld_cheque_cnt=0;
+			for (li_cidx=0; li_cidx<data_obj.cat.length; li_cidx++){
+					ls_current_cat = data_obj.cat[li_cidx];
+					for (li_pidx=0; li_pidx<data_obj[ls_current_cat].length; li_pidx++){
+							lo_coins = data_obj[ls_current_cat][li_pidx].coins;
+							for (li_i=0; li_i<13; li_i++){
+									lo_all_coin[li_i] += lo_coins[li_i];
+									lo_all_coin_value[li_i] += lo_coin_value[li_i] * lo_coins[li_i];
+							}
+							ld_cheque_cnt += data_obj[ls_current_cat][li_pidx].cheque_cnt;
+							ld_cheque_amt += data_obj[ls_current_cat][li_pidx].cheque_amt;
+					}
+			}
+
+			var ld_grand_total=0;
+			for (li_i=0; li_i<13; li_i++){
+					$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_coin_value[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+					$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_all_coin[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+					$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+lo_all_coin_value[li_i]+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+
+					ld_grand_total += lo_all_coin_value[li_i];
+			}
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_cnt+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_cheque_amt+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			ld_grand_total += ld_cheque_amt;
+
+			$('<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+			$('<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">'+ld_grand_total+'</div></div>').appendTo('#page_view_bankin #grid_bankin_smry');
+
+	}
+
+
+	</script>
+</head>
+<body>
+
+<!-- Start of first page -->
+<div data-role="page" id="page_main">
+
+	<div data-role="header">
+		<h1>Main menu</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ulx data-role="listview" data-ajax="false" data-inset="true" data-theme="d" />
+		<ul data-role="listview" data-inset="true">
+    		<li data-role="list-divider">Views</li>
+				<li><a href="#page_cat_edit">Category (Edit)<p>Edit Pockets by Category</p></a></li>
+				<li><a href="#page_view_cat">View by Category<p>View summary info by Category</p></a></li>
+				<li><a href="#page_view_bankin">View by BankIn<p>View summary bank-in details with cheque info</p></a></li>
+				<li><a href="#page_manage_data">Manage All<p>Initialise the data for new input</p></a></li>
+				<li><a href="#page_data_hist">Data History<p>All Historical Data</p></a></li>
+		</ul>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Main Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="bar">
+
+	<div data-role="header">
+		<h1>Bar</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>
+		<p><a href="#page_main">Back to main</a></p>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- Start of manage data page -->
+<div data-role="page" id="page_manage_data">
+
+	<div data-role="header">
+		<h1>Manage data</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<textarea cols="40" rows="8" id="textarea_data"></textarea>
+		<button data-inline="true" id='btn_copy_clip'>Copy to clipboard</button>
+		<button data-inline="true" id='btn_load_data'>Load Data to Local Storage</button>
+		<button data-inline="true" id='btn_clear_all'>Clear and Reset</button>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page manage data-->
+
+
+<!-- Start of page_cat_edit page -->
+<div data-role="page" id="page_cat_edit">
+
+	<div data-role="header">
+		<h1>Category (Edit)</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+    <select name="select_cat" id="select_cat">
+    </select>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+				<button id="btn_pkt_smry">Pocket Summary</button>
+				<button id="btn_pkt_dtls">Pocket Details</button>
+				<button id="btn_coin_smry">Coin Summary</button>
+				<button id="btn_pkt_add">Pocket Add</button>
+    </fieldset>
+
+
+		<div id="grid_pocket_smry" class="ui-grid-b">
+				<legend>Pocket Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+		</div><!-- /grid_pocket_smry -->
+		<div id="grid_pocket_dtls" class="ui-grid-b">
+				<legend>Pocket Details:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Details</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Remove</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">1000x1</div></div>
+				<div class="ui-block-c"><div ><input type="button" value="Delete"></div></div>
+		</div><!-- /grid_pocket_dtls -->
+		<div id="grid_coin_smry" class="ui-grid-b">
+				<legend>Coins Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">$1000</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">2</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+		</div><!-- /grid-c -->
+		<div id="grid_pocket_add" class="ui-grid-b">
+				<legend>Add Pocket:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1000
+						<span id='coin_1000_tcnt'/>
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						 <input type="number" data-inline="true" id="coin_1000_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_1000_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_1000_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_1000_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">500
+						<span id='coin_500_tcnt' />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_500_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_500_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_500_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_500_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">100
+						<span id='coin_100_tcnt' />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_100_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_100_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_100_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_100_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">50
+						<span id='coin_50_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_50_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_50_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_50_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_50_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">20
+						<span id='coin_20_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_20_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_20_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_20_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_20_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10
+						<span id='coin_10_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_10_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_10_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_10_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_10_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10c
+						<span id='coin_10c_tcnt' />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_10c_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_10c_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_10c_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_10c_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">5
+						<span id='coin_5_tcnt'   />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_5_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_5_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_5_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_5_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">2
+						<span id='coin_2_tcnt'   />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_2_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_2_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_2_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_2_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1
+						<span id='coin_1_tcnt'   />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_1_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_1_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_1_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_1_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.5
+						<span id='coin_05_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_05_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_05_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_05_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_05_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.2
+						<span id='coin_02_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_02_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_02_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_02_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_02_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.1
+						<span id='coin_01_tcnt'  />
+				</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_01_cnt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<button data-inline="true" id="btn_coin_01_cnt_add">Add</button>
+						<button data-inline="true" id="btn_coin_01_cnt_minus">Minus</button>
+						<span class="coin_total" id="coin_01_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+						<input type="number" data-inline="true" id="coin_prepaid_amt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_prepaid_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">Cheque</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+						<input type="number" data-inline="true" id="coin_cheque_cnt" value="">
+						<input type="number" data-inline="true" id="coin_cheque_amt" value="">
+				</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+						<span class="coin_total" id="coin_cheque_total"></span>
+				</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
+						<span class="coin_total" id="coin_total_amt"></span>
+				</div></div>
+
+				<button data-inline="true" id='btn_add_entry'>Add Entry</button>
+				<button data-inline="true" id='btn_reset_all'>Reset</button>
+		</div><!-- /grid-c -->
+
+	</div><!-- /content -->
+
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_cat_edit -->
+
+<!-- Start of page_view_cat page -->
+<div data-role="page" id="page_view_cat">
+
+	<div data-role="header">
+		<h1>View by Category</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="grid_cat_smry" class="ui-grid-d">
+				<legend>Category Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cat</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>
+				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Cash</div></div>
+				<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Morning</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">0</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">500</div></div>
+				<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">1500</div></div>
+				<div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">2000</div></div>
+		</div><!-- /grid_pocket_smry -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_view_cat -->
+
+
+
+<!-- Start of page_view_bankin page -->
+<div data-role="page" id="page_view_bankin">
+
+	<div data-role="header">
+		<h1>View by Bank-in</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="grid_bankin_smry" class="ui-grid-b">
+				<legend>Bank-in Summary:</legend>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Coins</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Cheque</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Grand</div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+		</div><!-- /grid_pocket_smry -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_view_bankin -->
+
+
+<!-- Start of page_data_hist page -->
+<div data-role="page" id="page_data_hist">
+
+	<div data-role="header">
+		<h1>Data History</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<a href="https://rainfalcon.github.io/mweb/2021-08-01-data.txt">2021-08-01-data.txt</a><br/>
+		<a href="https://rainfalcon.github.io/mweb/2021-09-05-data.txt">2021-09-05-data.txt</a><br/>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4><a href="#page_main">Back to main</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page page_view_bankin -->
+
+</body>
+</html>
