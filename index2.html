@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MWeb</title>
+	<title>MWeb2</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<style>
 		legend{
-			font-size: 1.5em;
+			font-size: 1em;
 			font-weight: bold;
 			padding-left: 0.5em;
 		}
@@ -717,149 +718,137 @@
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Amount</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Count</div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1000
-						<span id='coin_1000_tcnt'/>
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">1,000<span id='coin_1000_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+						<input type="number" data-mini="true" xdata-inline="true" id="coin_1000_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_1000_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_1000_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
-						 <input type="number" data-inline="true" id="coin_1000_cnt" value="">
-				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_1000_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_1000_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_1000_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">500
-						<span id='coin_500_tcnt' />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">500<span id='coin_500_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_500_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_500_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_500_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_500_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_500_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_500_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">100
-						<span id='coin_100_tcnt' />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">100<span id='coin_100_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_100_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_100_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_100_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_100_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_100_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_100_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">50
-						<span id='coin_50_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">50<span id='coin_50_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_50_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_50_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_50_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_50_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_50_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_50_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">20
-						<span id='coin_20_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">20<span id='coin_20_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_20_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_20_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_20_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_20_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_20_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_20_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10
-						<span id='coin_10_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">10<span id='coin_10_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_10_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_10_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_10_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_10_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_10_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_10_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">10c
-						<span id='coin_10c_tcnt' />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">10coin<span id='coin_10c_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_10c_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_10c_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_10c_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_10c_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_10c_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_10c_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">5
-						<span id='coin_5_tcnt'   />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">5<span id='coin_5_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_5_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_5_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_5_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_5_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_5_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_5_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">2
-						<span id='coin_2_tcnt'   />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">2<span id='coin_2_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_2_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_2_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_2_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_2_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_2_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_2_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">1
-						<span id='coin_1_tcnt'   />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">1<span id='coin_1_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_1_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_1_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_1_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_1_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_1_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_1_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.5
-						<span id='coin_05_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">0.5<span id='coin_05_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_05_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_05_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_05_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_05_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_05_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_05_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.2
-						<span id='coin_02_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">0.2<span id='coin_02_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_02_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_02_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_02_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_02_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_02_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_02_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">0.1
-						<span id='coin_01_tcnt'  />
-				</div></div>
-				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
+
+				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">0.1<span id='coin_01_tcnt'/></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_01_cnt" value="">
+						<button data-inline="true" data-mini="true" id="btn_coin_01_cnt_add">Add</button>
+						<button data-inline="true" data-mini="true" id="btn_coin_01_cnt_minus">Minus</button>
 				</div></div>
-				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
-						<button data-inline="true" data-mini="true" id="btn_coin_01_cnt_add">+</button>
-						<button data-inline="true" data-mini="true" id="btn_coin_01_cnt_minus">-</button>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_01_total"></span>
 				</div></div>
+
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Prepaid</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">
 						<input type="number" data-inline="true" id="coin_prepaid_amt" value="">
@@ -867,6 +856,7 @@
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
 						<span class="coin_total" id="coin_prepaid_total"></span>
 				</div></div>
+
 				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">Cheque</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
 						<input type="number" data-inline="true" id="coin_cheque_cnt" value="">
@@ -875,14 +865,18 @@
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
 						<span class="coin_total" id="coin_cheque_total"></span>
 				</div></div>
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
+
+				<div class="ui-block-a" ><div class="ui-bar ui-bar-a" style="height:60px">Total</div></div>
 				<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"></div></div>
 				<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">
 						<span class="coin_total" id="coin_total_amt"></span>
 				</div></div>
-
+				<div class="ui-block-a">
 				<button data-inline="true" id='btn_add_entry'>Add Entry</button>
+				</div>
+				<div class="ui-block-b">
 				<button data-inline="true" id='btn_reset_all'>Reset</button>
+				</div>
 		</div><!-- /grid-c -->
 
 	</div><!-- /content -->
