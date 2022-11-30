@@ -1,0 +1,1751 @@
+https://www.oracle.com/cloud/free/
+
+
+https://www.hkex.com.hk/chi/stat/dmstat/dayrpt/dmreport8_c.htm
+
+
+package sample
+
+import (
+    "sync"
+)
+
+var fileMutex = new(sync.RWMutex)
+
+func readFile() {
+    fileMutex.RLock()
+    defer fileMutex.RUnlock()
+
+    // Read the file. Don't modify it.
+}
+
+func writeFile() {
+    fileMutex.Lock()
+    defer fileMutex.Unlock()
+
+    // Write to the file.
+}
+
+http://thepythoncorner.com/dev/how-to-open-file-without-locking-it/
+https://stackoverflow.com/questions/14388608/python-opening-a-file-without-creating-a-lock
+
+After yesterday's talk:
+< 500k (HSF + Option)
+> 1000k (HSF + Option + stock)
+Current focus:
+HSF + Option
+
+Today's focus:
+>>>Janus
+Paper 10AM BuzzerHolt
+IB Operation Test (11AM)
+  Open strategy, deposit requirement (2legs, 4legs)
+  Close position
+  Open locking strategy, deposit change
+Watch Yip Lesson 13
+  上課連結: https://edu.money-tab.com/yipc5l1
+  密碼: bhd6
+Watch Yip 2 video 15
+  https://www.youtube.com/watch?v=pNfKpHOAOZc&feature=youtu.be
+  https://www.youtube.com/watch?v=Sf0p573VitI&feature=youtu.be
+Download Data
+Make 1 prediction today (store in word file)
+  chart + description + entry + TP + SL
+Study Bot
+  1. Open interest Study
+  2. Max high/ min low probability (20yr)
+
+>>>Stephen
+Fix excel problem in calculation of probability
+Auto Futu
+  test tonight on MHI
+IB
+  paid data price
+  check IB functionality (familiar with)
+Auto download HKEX
+Study what is option pain
+
+
+
+MA Cross
+- MA cross 50/200 (long short filter)
+- trend line breakout to get in under lower timeframe
+- exit when MA cross back again
+
+KD
+- no use overbought/oversold
+- no divergent
+
+Use MA as filter
+KD as trigger
+SR as area
+
+https://www.tradingwithrayner.com/candlestick-patterns/
+Hammer
+  top 1/4 (open close)
+Bullish Engulfing Pattern
+  green candle body enclosing prev. red candle body
+Piercing Pattern
+  green candle body reaching > 0.5 of prev. red candle body
+Tweezer Bottom
+  two needle (1/3 open, close)
+Morning Star
+  3/4 body down + body in 1/4 (open, close) + 3/4 body up
+
+
+https://www.interactivebrokers.com/en/index.php?f=2226
+
+
+HC Hopewell Centre
+- .comm
+- Salto TA manual transfer
+- Wifi Network
+- TA system (Cityray)
+JKL Jacqueline
+- Opt Test
+- Auto Hedge
+JNS Janus
+- Prob. calculation
+- HSF 10AM
+- Opt. Open, Lock, Close
+- KillerAM
+YMM Yamm
+- class
+- homework
+NEO Salto
+- design comp.
+- design comp. money
+- design product
+HPY3 Happy3 Rich
+- PJET3
+- SVN
+- SSVN
+- NSEMA
+- MCJ
+YIP Yip Option
+- class
+- SOP design
+PY Python Class
+- class
+- homework
+RAIN Rain US Option
+- USOpt
+Facebook Master Class Fx
+- Video
+
+Todo:
+Test Futu auto, 10-11 live JNS
+Facebook Master Class Fx
+Wordpress FxClub
+YIP - class
+YIP - SOP design
+YMM - class
+YMM - homework
+PY - class
+NEO
+
+
+
+
+>>> Main Objectives
++ 500k in 6 months
+
+>>> Main Tasks
+JNS. BuzzerHolt    (req. 200k) 100%
+JNS. Option.IB.HSI (req. 200k)  80%
+      - prob calc
+      - SP + SC + HSF
+      - LC + LC + HSF
+
+JKS Option         (req. 100k) 10%
+      - SP + SC + HSF
+      - LC + LC + HSF
+JKS.MCJ 140SL
+
+STP Salto Room Booking (req. time) 0%
+STP HSF MDY AC, auto  (req. 200k) 10%
+STP PJET 3.0
+STP KillerNEma
+STP KillerAM
+STP Fx Manual
+
+>>> todo:
+Futu Auto MT4 Connector
+Option HSI
+- make statistic
+Biz Salto
+- research (existing booking system, open source system, design)
+
+>>> todo > Class:
+- Python
+- Yip Option
+- CiFu Stock
+- Yamm Fx
+
+>>> todo > Study:
+- AI prediction
+- Python
+    Python.TradeEngine
+    Python.BTEngine
+    Python.DemoEngine
+    Python.Bot.HoltMacd
+- Pandas
+- Telegram bot
+- EA
+    KillerAM
+    KillerPivotPoint
+    Killer1NN
+- statistic calculation
+    Normal Distribution
+- ThinkOrSwim (study only, bad commission)
+>>> Dinner
+    Birthday
+        ButteryFly
+        Jacqueline
+        Karen
+        Cherry
+
+
+HelioHost
+https://www.heliohost.org
+https://my.freenom.com/cart.php?a=confdomains&language=english
+https://www.biz.nf/web-hosting.php
+https://www.floydhub.com/pricing
+https://www.datasciencelearner.com/top-3-free-cloud-gpu-server-must-read/
+https://www.kaggle.com
+https://hackernoon.com/begin-your-deep-learning-project-for-free-free-gpu-processing-free-storage-free-easy-upload-b4dba18abebc
+
+https://zhuanlan.zhihu.com/p/52881791
+https://zhuanlan.zhihu.com/p/116120264
+https://zhuanlan.zhihu.com/p/86026059
+https://zhuanlan.zhihu.com/p/108286932
+
+
+Option HSI
+Future HSI
+Future HHI
+Option HK Stock
+Option US Stock
+Stock HK
+Stock US big
+Stock US penny
+ETF
+Biz Tutor
+Biz Salto
+
+
+
+
+
+
+https://www.youtube.com/watch?v=8M4CGRXoiug
+https://www.youtube.com/watch?v=yZ3qnSDkGTg
+https://www.youtube.com/results?search_query=小周天
+https://www.youtube.com/watch?v=j61ziZwZXiI
+https://www.youtube.com/watch?v=zpEyQ60Gu9Q&feature=youtu.be
+
+https://youtu.be/PbcJ7M9LX3k
+https://youtu.be/qBAcdEshRX8
+https://youtu.be/eayF-Xc9S2g
+
+
+https://hk.finance.yahoo.com/quote/%5EHSI/history/
+https://hk.finance.yahoo.com/quote/%5EHSCE/history/
+
+
+https://www.youtube.com/watch?v=YMqUW2LYuYc&feature=youtu.be
+https://www.youtube.com/watch?v=87laE_PAb64&feature=youtu.be
+
+https://youtu.be/0MEedZVYCQ8
+
+AS Café , Good Taste, Thai Legend, Casa Luca &  港嘢食堂
+
+
+https://www.youtube.com/watch?v=HVZgaAW4tSs
+https://www.youtube.com/watch?v=2EYB8qY9Yjw
+https://www.youtube.com/watch?v=_HfD9N4cRsQ
+https://www.youtube.com/watch?v=kkxCowWmTnA
+https://www.youtube.com/watch?v=Q551t9LzRdQ
+
+DevOps
+https://www.youtube.com/watch?v=JHoy3lDZOfY
+https://www.youtube.com/watch?v=7LcFZNuZaVY
+https://www.youtube.com/watch?v=UTKIT6STSVM
+  Source Control
+    GitHub
+  Testing
+    Jenkins
+    https://www.jenkins.io/
+    Selenium
+    https://www.selenium.dev
+  Container
+    Docker
+    https://www.docker.com
+    Kubernutes
+    https://kubernetes.io
+  Automation / deploy / monitor
+    NewRelic
+    https://newrelic.com
+    Chef
+    https://www.chef.io/products/automate/
+    Puppet
+    https://puppet.com
+    Salt Stack
+    https://www.saltstack.com
+    Nagios
+    https://www.nagios.org
+    Ansible
+    https://www.ansible.com
+
+Micro service
+https://www.youtube.com/watch?v=CZ3wIuvmHeM
+https://www.youtube.com/watch?v=1xo-0gCVhTU
+
+Low Code
+  https://www.wavemaker.com/new-app-development/
+  https://www.altova.com/rmad-tool?gclid=CjwKCAjw4871BRAjEiwAbxXi20QHEEZXCDuXIgX-qaxSyUe6HYKp9noETMZy0ab73lD2aQhLVUO5ShoCbpwQAvD_BwE
+
+MobileTogether Altova
+  https://www.altova.com/mobiletogether/demos#video-getting-started
+
+iOS tutorial
+  https://www.youtube.com/watch?v=09TeUXjzpKs
+  https://www.youtube.com/watch?v=jniJeamcIUU
+  https://www.youtube.com/watch?v=lApzR2zpbSo
+
+Flutter
+  https://www.youtube.com/watch?v=GLSG_Wh_YWc
+
+Dropsource
+  https://www.dropsource.com
+Backendless
+  https://backendless.com
+  https://backendless.com/how-to-create-a-mobile-application-with-backendless-and-dropsource-part1/
+  https://backendless.com/developing-a-mobile-application-without-any-coding-using-backendless-and-dropsource-part2/
+
+Bubble.is
+  https://bubble.io/features
+
+Swagger
+  https://swagger.io
+
+IIS: PHP Manager
+
+Sheety : make google sheet to RESTful api
+  https://sheety.co/pricing
+
+Ionic Frameworks
+  https://ionicframework.com/x
+
+https://www.kony.com/quantum/?ref=producthunt
+
+Google Firebase
+  https://firebase.google.com
+  https://firebase.google.com/products/cloud-messaging
+  https://www.youtube.com/watch?v=6TWJ_rR7K6g
+
+Felgo
+  https://blog.felgo.com/cross-platform-app-development/flutter-react-native-felgo-framework-comparison
+
+https://www.producthunt.com/alternatives/dropsource-4
+https://table2site.com/site/nocodetools
+
+Seat booking
+  https://www.zoho.com/creator/apps/seat-booking.html
+
+VBScript: parse csv
+  https://www.rlmueller.net/ReadCSV.htm
+  https://www.rlmueller.net/Programs/ReadCSV.txt
+
+Low Code
+  https://www.google.com/search?client=safari&rls=en&q=low+code+platforms&ie=UTF-8&oe=UTF-8
+
+  https://www.youtube.com/watch?v=lApzR2zpbSo
+
+Thunkable
+  https://thunkable.com/#/pricing
+  https://www.youtube.com/watch?v=Aflbbvw25xA
+
+Adv. Google Site
+  https://www.youtube.com/watch?v=1Ny-1zHw5AI
+
+Develop a client/server mobile app without any coding. 100% codeless
+  https://www.youtube.com/watch?v=lApzR2zpbSo
+
+Flutter Tutorial for Beginners - Build iOS and Android Apps with Google's Flutter & Dart
+  https://www.youtube.com/watch?v=GLSG_Wh_YWc
+  https://www.youtube.com/watch?v=x0uinJvhNxI
+  https://www.youtube.com/watch?v=80pRyn7fZRk
+  https://www.youtube.com/watch?v=1gDhl4leEzA
+  https://www.youtube.com/watch?v=S59b-XFsyY8
+  https://www.youtube.com/watch?v=W1pNjxmNHNQ
+  https://www.youtube.com/watch?v=7sJZi0grFR4
+  https://www.youtube.com/watch?v=pTJJsmejUOQ
+  https://www.youtube.com/watch?v=CSa6Ocyog4U
+
+Breakfree Trading
+  https://www.breakfreetrading.com/?gclid=Cj0KCQjwzN71BRCOARIsAF8pjfgP-ysbn_kx1li5M2x8usK7OvmXquM4quYA-vxWM1wGXuIXCL6IJmUaAoB2EALw_wcB
+
+Royalty free images
+  https://www.pexels.com/royalty-free-images/
+  https://mashable.com/2017/05/23/where-to-find-royalty-free-images/
+  https://buffer.com/library/free-images
+  https://www.wyzowl.com/royalty-free-images/
+  https://www.foleon.com/blog/5-sites-for-free-stock-photos
+  https://www.makeuseof.com/tag/top-5-websites-for-free-stock-photographs/
+  https://blog.snappa.com/free-stock-photos/
+  https://99designs.com/blog/resources/public-domain-image-resources/
+Royalty free music
+  https://www.bensound.com/royalty-free-music/2
+
+
+Samsung Galaxy S8, S8+, S9, S9+, and Note 8, Note 9, and Tab S4.
+
+CloudReady
+  https://www.neverware.com/freedownload#home-edition-install
+  https://www.youtube.com/watch?v=Ry4Z5pFdut0
+
+Rayner Tao
+  https://www.tradingwithrayner.com/trading-as-a-business/
+
+Note:
+We normally compare 形 > 幅度 > 時間
+力度
+  candle
+    加速 （短線資金）
+  走勢
+    明確
+橫行
+  要四線
+  順勢準確度減
+  小逆勢
+逆勢
+  In daily > 36 day
+  穿頭破腳
+  反加速
+  Wave 1 beginning
+  Wave 3 beginning
+Broker
+  TickMill x
+  VantageFx (LMAX,CFH)
+日線小D突破
+高位加速升，回落 => buy stop
+Steps
+  is it 橫行中?
+    4 lines
+  評分
+  順逆
+日線 TP around 800 - 1200 steps
+If 長上影線，離底不遠
+Entry method:
+  Breakthrough (in trend)
+  Retrace / rebounce to 61.8%
+Exit:
+  Weak: within 1-2 bars
+  Strong: Hold... pivot point...
+Wave 1
+Requirement: Move up above Previous major resistance
+Property: Undetectable, bad news is still around
+Wave 2
+Requirement: Cannot be lower than wave 1 starting point
+Retrace around 61.8 (>50% and < 76.4%)
+Property: Not smooth is good
+Wave 3
+Requirement: Price move bigger than wave 1, Time longer than wave 1
+Property: 樓梯市, fast move up, 如果順勢單在wave 3 can stay, if up "wave 3" is less than wave 1 in size, consider to go down and prepare for reverse, near the start of wave 3 is the longest trend start position最長順勢升浪位
+Wave 4
+Requirement: Time longer than wave 2
+Property: difficult to find the price drop target (end point), Likely has round bottom, double top, reverse head and shoulder, 奇怪，承接力不足
+Wave 5
+Requirement: Confirm when 收穿 wave 3 end point
+Property: Aggressive up
+Wave A
+Property: Down either start fast/start slow
+Wave B
+Requirement: up to around 61.8%
+Property: Best not smoothly up, wait for 上長影線，穿頭破腳
+Wave C
+Size bigger than wave A
+
+
+http://animiz.com/features/animation
+
+https://link.springer.com/content/pdf/10.1057/palgrave.dutr.1840004.pdf
+
+http://www.optionistics.com/screener/open-interest-highest-stock
+https://marketchameleon.com/Reports/optionVolumeReport?trafficsource=adwords&gclid=CjwKCAjwwYP2BRBGEiwAkoBpAgVCm_siYlUxBW_mUUJtvfxQp5eLYgU3SzJ3G8lkZcwutfuWKRV1choCQK4QAvD_BwE
+
+
+Class 2
+時空+ 5浪+ 支持阻力 + 長短圖
+
+http://www.arealme.com/16types/zh/
+
+[12:11 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 記得學左既入市手法都係機率遊戲。
+
+最重要係入市前既走勢評估，同入市後既應變。
+[12:33 AM, 5/20/2020] +852 9218 3825: 即係乜手法都要認浪，認天地人, 時空先入市.......?  做2兩支燭短線果啲使唔使?
+[12:40 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 認浪只為做得長，同埋stop定收穿，同做咩策略
+[12:40 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 天地人同浪差吾多
+[12:41 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 時空for  逆勢
+[12:41 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 你要總結下，咁多手法交易前，應該用咩去配合。
+[12:42 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 列如，n形突破，要出哂全部
+[12:42 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 4小時線形突破要咩呢？
+[12:43 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: macd 突破都分两款
+[12:49 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 其實最基礎做順勢
+
+認到橫行
+睇到連貫同持續
+分到做波浪，定幾支燭既小突破
+
+做短線都夠做了
+[12:51 AM, 5/20/2020] +852 9218 3825: 今日講嘅係順勢突破應該係偏短，應該注意stop , 定收穿
+
+不過頭講zigzac, 五浪提防假突破，喺4浪底就要小心假突破，如果喺認到buy stop 喺3浪當中，可以擺長少少?
+
+我又好似問咗蠢問題🤦🏻‍♂️
+[12:52 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 係，3浪 中 可放長D。
+
+2浪去3就最長
+[12:53 AM, 5/20/2020] +852 9218 3825: 幾支燭嘅小突破係咪連續4支陰陽再做多兩支
+[12:54 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: 可以咁講，其實吾數浪既N都係一两支燭內走最好
+[12:55 AM, 5/20/2020] Yamm Lai Sir, Fx Teacher: @八哥 請幫我安排下功課
+[12:58 AM, 5/20/2020] +852 9218 3825: 阿sir 你之前講話長period圖可以set stop單，睇到到收穿梗係最好，但頭先講嘅zigzac入市方法，如果喺h4以上全用stop單，ok唔ok?
+[1:22 AM, 5/20/2020] +852 9269 9099: 請大家自己㨂貨幣同時段用附件 excel交功課 (可因應自己玩法修改), 以下為各同學分組, 漏左自己加反上去 :
+
+4hrs Zigzag
+1)Queenie
+2)Maggie
+3)Calvin Siu
+4) Francis Chan
+5)Stephen Liu
+6)Zoe Ching
+7)夢
+
+1hr MACD
+1)Kennex
+2)Michael Kwok
+3)Polo Chan
+4)Jerry Lau
+5)Lawrence Yuen
+6)Sai Wai
+7)Sam Lo
+8)Raptor Au
+
+
+Class 2 2020-05-19 MK
+MBTI Test
+Introversion/Extraversion
+  E: People and things
+  I: Idea and information
+Sensing/Intuition
+  S: Fact and reality
+  N: Possibility and potential
+Thinking/Feeling
+  T: Logic and truth
+  F: Values and relationship
+Judging/Perception.
+  J: Lifestyle well structured
+  P: Go with the flow
+Yamm: E, N, T, J
+
+自信，自筆，蠃家心態（作出對自己最有利的決定）
+
+重溫
+1浪，升穿前重要高位/阻力
+2浪，回50 - 61.8%
+3浪，波幅丶時間丶線 大於 1浪，持續＋連貫＋加速/樓梯市
+4浪，可急跌，3浪後，時間 大於 2浪 （高位平倉）
+    Entry: W，頭肩底，橫行 (catch wave 5)
+5浪，可有可無，急升
+X浪，減速
+
+A浪，急升後急跌，跌穿5浪頭
+B浪，好淡爭持，not smooth is good
+C浪，時間大於AB浪，圓底
+    Entry: 收穿 B浪 / not smooth stop order B浪，big TP + small SL
+
+波浪理論，許繼光
+
+Short term TP
+D1 TP: 800-1200
+H4 TP: 400-800
+H1 TP: 200 400
+
+Long term, let it flow once the order is "zero cost"
+  in Wave 3
+  in Wave C
+  in Wave 1 head / wave 2 tail
+
+順勢
+  橫行
+  逆勢
+  評分
+  持續 (4B)
+  連貫 (4B x2)
+  Higher timeframe
+Note:
+  GBPJPY
+  USDJPY
+  XAUUSD
+Likely fake breakout
+  JPYUSD
+  CHFUSD
+
+突破
+  ZigZag
+  短線 (2Bars)
+
+  雙重突破等確認 (stop)
+  大勢 好於 小勢
+  High timeframe，H1 以下收穿
+  持續，連貫，加速 (stop)
+  五浪提防假突破 （stop)
+  逆勢突破比較少假突破
+  橫行以最高最底做收穿突破
+  估你唔到 (stop)
+    Long Needle
+    橫行突破後的底
+    反彈後的底
+
+  順勢不要常反手
+  反手 recover 80% as target
+
+歌訣
+  高底做逆勢
+  橫行做突破
+  中間做順勢
+  五浪提防假突破
+  估你唔到
+
+Note. TA:
+  CAP Channel
+  ADR
+  Env
+
+candle
+  Signal
+  Support / Resistance
+
+3 入市
+P1: 4H high / low break
+P2: 1H 1500 Macd (fix point)
+P3: 1H 1500 Macd (by 8:10 TP:SL)
+
+P1:
+  H4 bull bear candle to get a range,
+  entry: range break by close (signal candle)
+  exit: biggest high / low, signal candle high / low
+  reverse: by close above / below signal candle, recover 70%
+  emergency exit: side way, needle
+
+P2:
+  H1, 15:00, Macd increase in 1 hour, Macd above/below
+
+
+https://saltoks.com/wp-content/uploads/2019/09/Salto-KS-Web-Application-User-Manual.pdf
+
+
+https://www.hk01.com/社會新聞/477110/保就業計劃今日接受申請-一文睇清計劃要點及申請方法
+
+>> Issue
+Renew of push cert
+
+>> Bug
+[iOS] video question can be answered without watching it first
+Not to show course that is before registration start
+
+>> Missing Function
+Export XLS List
+IM Module
+IM - allow to reply text only to all message type
+Front page Module not working
+
+https://idratherbewriting.com/learnapidoc/pubapis_openapi_tutorial_overview.html
+
+
+https://www.ctolib.com/physercoe-starquant.html
+https://swift.ctolib.com/tushare.html
+https://www.ctolib.com/topics-143450.html
+
+https://www.ctolib.com/topics-142572.html
+https://kafka.apache.org
+
+https://www.ctolib.com/topics-141143.html
+https://www.ctolib.com/topics-136412.html
+
+js tensorflow
+https://www.ctolib.com/topics-141996.html
+
+model combine
+https://www.ctolib.com/topics-142084.html
+https://github.com/yzhao062/combo
+
+为UCI机器学习库引入简单直观的Python API
+https://www.ctolib.com/topics-139009.html
+
+[译] ​21 个必须知道的机器学习开源工具
+https://www.ctolib.com/topics-141947.html
+
+如何用Python一步步完成机器学习小项目
+https://www.ctolib.com/topics-136408.html
+
+基于PyTorch的GAN框架TorchGAN：用架构级API轻松定制GAN项目
+https://www.ctolib.com/topics-137384.html
+
+vn.py
+https://www.ctolib.com/topics-141991.html
+
+100 天从 Python 新手到大师
+https://www.ctolib.com/topics-140781.html
+
+
+简明 Python 教程
+https://www.ctolib.com/docs-simple-python-course-c-index.html
+简明 Python 教程
+https://www.ctolib.com/docs/sfile/a-byte-of-python/index.html
+
+区块链技术指南
+https://www.ctolib.com/docs/sfile/blockchain_guide/index.html
+
+Python3 cookbook
+https://www.ctolib.com/docs-Python3-Cookbook-cn-c-index.html
+
+php to exe
+https://www.google.com/search?client=safari&rls=en&q=package+php+to+exe&ie=UTF-8&oe=UTF-8
+https://stackoverflow.com/questions/9046675/convert-a-php-script-into-a-stand-alone-windows-executable
+https://github.com/peachpiecompiler/peachpie
+
+run anaconda in batch
+https://medium.com/@divjyotsinghlearn/automate-conda-commands-ec551684f4f2
+https://ios.developreference.com/article/13423656/How+to+make+batch+files+run+in+anaconda+prompt
+https://stackoverflow.com/questions/46305569/how-to-make-batch-files-run-in-anaconda-prompt
+
+https://www.tradingwithrayner.com/momentum-trading/
+
+
+telegram
+https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets
+https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/echobot2.py
+https://github.com/python-telegram-bot/python-telegram-bot/tree/master/examples
+https://www.toptal.com/python/telegram-bot-tutorial-python
+
+statistic
+https://stattrek.com/statistics/charts/histogram.aspx
+
+High fast
+學員登記
+地區
+行業
+公司
+職位
+個人品牌
+男女
+年齡
+平均收入
+四大象限
+電話
+Whatsapp
+微信
+Paypal
+Line
+Telegram
+中文名
+英文名
+簡稱
+銀行號碼
+銀行注冊地點
+電郵密碼
+只可一次
+推廌碼
+機器人識別
+風險細則
+私隱條例
+銷售通知
+
+
+
+Current plan/execution: (studying/planning/BT/testing/executing/waiting)
+S Fx:
+  (studying)  28bb
+  (testing)   28ma
+  (executing) copy trade SVN
+S USOption:
+  (studying) lesson
+  (studying) DD quant in development
+J HSF:
+  (testing) fat BB
+J HSI Option:
+  (waiting) for DD quant for BT
+  (executing) Yip Bot data
+
+Stephen todo:
+- QQC design and work on DDQuant
+- QQC design 28BB
+- Study US Option Video
+- Paper trade US Option
+- Lesson:
+    Python, US Option, Fx Manual
+
+
+- Fat man video 2 (S only)
+- QQC develop a strategy in option (inspired by Rain)
+- QQC check telegram bot possible usage
+- study 1M-1H pattern on HSF
+- MT4 in HSF for trial auto run (find setting and EA) wait for Janus
+
+- Read
+- Research column database - Spark
+
+Current study:
+- fat man
+- rain strategy (can wait until it is finished)
+- Yip option DD quant
+- BB study continue (pick up from Janus)
+- 28pair Fx study
+
+
+https://softeng.oicr.on.ca/brice_aminou/2017/03/07/Mobile-app-with-Laravel/
+
+Steps:
+- overall properties of the instrument
+- structure of the instrument
+  - ma + Granville Rules
+    https://www.youtube.com/watch?v=9WfxICemLvE
+    https://www.youtube.com/watch?v=SZT0-4EEeyM
+    https://www.youtube.com/watch?v=MISvgn2vNSA
+    http://www.angelfire.com/sk/mtsp500/granville.html
+  - CL
+  - 1,2,3 (range, false break, move)
+
+Laravel
+https://www.youtube.com/results?search_query=laravel+tuturial
+https://www.youtube.com/watch?v=ImtZ5yENzgE
+
+0.363644232288*B1[i]
++0.319961361319*B1[i+1]
++0.2429021537279*B1[i+2]
++0.1499479402208*B1[i+3]
++0.0606476023757*B1[i+4]
+-0.00876136797274*B1[i+5]
+-0.0492967601969*B1[i+6]
+-0.0606402244647*B1[i+7]
+-0.0496978153976*B1[i+8]
+-0.02724932305397*B1[i+9]
+-0.00400372352396*B1[i+10]
++0.01244416185618*B1[i+11]
++0.01927941647120*B1[i+12]
++0.01821767237980*B1[i+13]
++0.01598780862402*B1[i+14]
+-0.00338313465225*B1[i+15];
+
+
+0.363644232288
++0.319961361319
++0.2429021537279
++0.1499479402208
++0.0606476023757
+-0.00876136797274
+-0.0492967601969
+-0.0606402244647
+-0.0496978153976
+-0.02724932305397
+-0.00400372352396
++0.01244416185618
++0.01927941647120
++0.01821767237980
++0.01598780862402
+-0.00338313465225
+
+pip install python-telegram-bot
+509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ
+
+import telegram
+bot = telegram.Bot(token='509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ')
+print(bot.get_me())
+
+def handle(msg):
+   pprint(msg)
+bot.message_loop(handle)
+
+
+Find telegram API library (python / vba / )
+
+Cert to Tomcat
+https://notesbytom.wordpress.com/2016/05/11/convert-windows-iis-ssl-certificate-to-tomcat-java-format/
+https://www.ssls.com/knowledgebase/how-to-install-an-ssl-certificate-on-a-tomcat-server/
+https://decoder.link/converter
+
+
+Salto KS
+https://saltoks.com/developers/core/welcome/
+
+Cityray T&A
+https://ham.go2hopewell.com:8711/tnauat/ess46/cb_hrms/index.cfm?event=hrms.index&dp=hrms.dspHome&menu_id=
+
+外汇ea之家
+Simple Daily Trend Reversal
+http://www.eazhijia.com/thread-1047601-1-1.html
+
+https://www.google.com/search?client=safari&rls=en&q=%E9%9A%B1%E7%A7%98%E7%9A%84%E8%A7%92%E8%90%BD&ie=UTF-8&oe=UTF-8
+
+
+Stan Weinstein's Secrets for Profiting in Bull and Bear Markets
+Way of the turtle
+
+https://www.pdfdrive.com/options-trading-strategies-complete-guide-to-getting-started-and-making-money-with-stock-options-d176368277.html
+
+https://www.greattradingsystems.com/Pivot+Range-metatraderindicator
+https://forex-station.com/viewtopic.php?t=8473637
+https://zerodha.com/varsity/chapter/the-central-pivot-range/
+https://zerodha.com/varsity/
+
+Against the Gods: The Remarkable Story of Risk
+
+https://2ndskiesforex.com/risk-of-ruin-calculator/
+https://youtu.be/ZzQGbfFFX-M
+
+http://www.gupang.com/201803/0323444A2018.html
+http://www.gupang.com/202006/060451L52020.html
+http://www.gupang.com/tongdaxin/
+
+DragonFly
+https://www.tradingsystemforex.com/ideas-for-expert-advisors/585-dragonfly-ea.html
+
+Hornet
+https://www.mql5.com/en/market/product/38851
+
+Scott Welsh
+https://scottwelshstrategies.com
+
+BSAppsFx
+
+Grandmaster EA
+https://www.youtube.com/watch?v=3rfEWhJiWYY
+x
+
+http://qieenewingchun.blogspot.com/2013/12/yahoo-blog.html?m=1
+
+The Inevitability of Becoming Rich: An Interview with a Master
+https://www.amazon.com/Inevitability-Becoming-Rich-Interview-Master-ebook/dp/B06XP3SHVY
+
+Fx teacher: Scott Welsh
+https://scottwelshstrategies.com
+https://www.youtube.com/watch?v=wqxd7RLcI50
+https://www.youtube.com/user/wwood666
+
+DragonFly EA
+
+Hornet EA
+
+Day Trader Market Profile - indicator for MetaTrader 4
+https://www.mql5.com/en/code/11128
+
+
+divergence
+https://www.best-metatrader-indicators.com/macd-divergence/
+
+https://github.com/topics/moving-average?o=desc&s=forks
+https://towardsdatascience.com/machine-learning-techniques-applied-to-stock-price-prediction-6c1994da8001
+https://towardsdatascience.com/machine-learning-made-simple-with-excel-1bffd7901502
+
+Python OpenCV
+https://www.youtube.com/watch?v=WQeoO7MI0Bs
+
+https://forum-treiderov.com/index.php
+
+https://www.opensourceforu.com/2017/05/three-python-databases-pickledb-tinydb-zodb/
+
+indicators
+https://4xone.com/forex-mt4-indicators/forex-metatrader-mt4-indicators-t/
+
+
+>>Janus
+  Action
+    GEO J
+    GEO S
+    Martin5000
+  Plan
+    Manual J BlackDragon
+    Manual S RV
+
+>>Stephen
+  Plan
+    Manual Divergence, EMAx3, Trend break, Signal Tom, Imbalance, Wykoff
+    GEO M
+    Option Alpha
+    KBS Auto
+    FxCore100
+    VCP
+    Futu Filter
+    Martin, accurate sizing
+    AI, KNN, Re-inforcement
+
+>>Jacqueline
+  Action
+    AlgoExp Auto
+
+>>Broker
+  Action
+    Futu
+    ICMarket
+    AxiTrader
+    GEO S
+  Idle
+    VBroker
+    ChiefGroup
+    Exness
+    FBS
+  Empty
+    IB
+    iAccess
+    SHK Kong Dai
+
+https://forexwinners.biz/data/7ksxvsuzkwff/ForexWinners.Ru-P2_-_Advance_trading_400_Series.part05.rar.html
+
+
+http://data1.forexwinners.biz:8080/d/h3g532jbwomnxgkpxloqzjcfj4qbomx4avufk73te56amtdzdh3unoxvmdkrhbuv772tafwy/1-ForexWinners.ru-ProTrader.rar
+https://forexwinners.biz/data/ctml6f8r9mtn/2-ForexWinners.ru-ProTrader.rar.html
+http://data1.forexwinners.biz:8080/d/ctml6f8r9mtn/2-ForexWinners.ru-ProTrader.rar
+
+https://www.perfecttrendsystem.com/blog_mt5_4/en/hma-indicator-for-mt5
+http://desynced.net/fx/eas/indicators.php
+
+set from hampster author
+https://drive.google.com/drive/folders/106TFuW4WHh2PS-dVnqb1-GceKnpGypUP
+
+
+https://www.edr.hk/cmp/info/sun-feng-a
+
+https://pttnews.cc/a9f7b35100
+
+https://www.medimart.com.hk/product/美國mediflow-水枕-科研實証改善睡眠
+
+https://www.medimart.com.hk/product/15分鐘舒緩頸痛-humana-三層-四層頸椎牽引器
+
+
+中小企網路技術支援
+https://www.google.com/search?client=safari&rls=en&q=%E4%B8%AD%E5%B0%8F%E4%BC%81%E7%B6%B2%E8%B7%AF%E6%8A%80%E8%A1%93%E6%94%AF%E6%8F%B4&ie=UTF-8&oe=UTF-8
+
+https://www.it-proco.com/it支援服務?gclid=CjwKCAiAyc2BBhAaEiwA44-wW2BbqQoqOpoTJvXdzWA_s9KGqxPWKRkffYREscqGbBtNpmQ-OE7XBBoC55AQAvD_BwE
+
+https://shop.pegasus.hk/contact-us
+
+https://docs.google.com/spreadsheets/d/1b7-GOUNhPZWCniG3uC7_ToWz_qCVUIjOU_ln6qXPaCM/edit#gid=544991776
+
+https://www.mql5.com/ru/signals/946416#!tab=history
+
+https://www.colormango.com/product/strategyquant-x_135587.html
+
+https://www.mql5.com/en/articles/8616
+https://www.mql5.com/en/search#!keyword=DEVELOPING%20A%20SELF-ADAPTING%20ALGORITHM
+https://www.mql5.com/en/forum/174396/page8#comment_20851301
+https://www.mql5.com/en/articles/8767
+https://www.mql5.com/en/forum/175342/page4#comment_20851297
+https://www.mql5.com/en/forum/174396/page8#comment_20628531
+https://www.mql5.com/en/articles/3507
+
+https://forexsb.com
+
+https://quantpedia.com/links-tools/
+
+https://strategyquant.knoji.com/alternatives/
+
+https://www.coensio.com/wp/
+
+https://aostrading.cz/en/software/strategyquant/
+
+https://algotrading101.com/learn/quantitative-trading-strategies/
+
+https://awesomeopensource.com/projects/trading-strategies
+
+https://www.quantstart.com/articles/backtesting-systematic-trading-strategies-in-python-considerations-and-open-source-frameworks/
+
+https://github.com/quantopian/zipline
+
+
+SQX Crash Course
+https://www.coensio.com/forum/ATC/coensios-free-algorithmic-trading-course/strategyquant-crash-course-2019/
+
+Dear xxx,
+
+As per our conversation this morning, the contact us page has been incorrectly updated by your team.
+It is now fixed. Please check and confirm that there is no page incorrectly updated.
+
+Regards,
+
+
+https://forexsb.com/repository/repository_indicators/
+if you would replace code snippets in lines 77 and 84 as below, you can let the low`s or high`s oscillate by one percent.
+// Long trade
+Low [iBar - 2] <((High [iBar - 1] - Low [iBar - 1]) / 99) + Low [iBar - 1] &&
+Low [iBar - 1] <((High [iBar - 2] - Low [iBar - 2]) / 99) + Low [iBar - 2])
+
+// Short trade
+High [iBar - 2]> ((High [iBar - 1] - Low [iBar - 1]) / 100 * 99) + Low [iBar - 1] &&
+High [iBar - 1]> ((High [iBar - 2] - Low [iBar - 2]) / 100 * 99) + Low [iBar - 2])
+
+we're doing a little opensouce here. come on.
+
+tho.schu
+in mql:
+
+line 73
+Data.Low [bar - 2] <((Data.High [bar - 1] - Data.Low [bar - 1]) / 99) + Data.Low [bar - 1] &&
+Data.Low [bar - 1] <((Data.High [bar - 2] - Data.Low [bar - 2]) / 99) + Data.Low [bar - 2])
+
+line 82
+Data.High [bar - 2]> ((Data.High [bar - 1] - Data.Low [bar - 1]) / 100 * 99) + Data.Low [bar - 1] &&
+Data.High [bar - 1]> ((Data.High [bar - 2] - Data.Low [bar - 2]) / 100 * 99) + Data.Low [bar - 2])
+
+
+Active
+Algo_exp (MC, HSF)
+Working
+Geo (auto)
+StrategyQuant
+Pending
+Geo (manual)
+Benson (Martin)
+M5k (Martin)
+GGT (Martin)
+AI Re-inforcement
+AI Forest, Categorise
+Indicator for entry
+SManual - XAUUSD
+SManual - HSF
+JManual - HSF, 2top cont, heand and shoulder, exchange, 2top reverse
+TSCI - Mr. Hui
+Martin by % or retracement
+Learning
+OptionAlpha (manual)
+OptionAlpha (auto)
+USCaption (video)
+Side
+SSF
+MM stock list
+
+
+
+   public function ios_push($deviceToken,$aps,$custom_data)
+     {
+       // Put your private key's passphrase here:密语
+       $passphrase = '123456';
+       $keys = __DIR__."/../storage/app/hopewell_push_prod.pem";
+       $ctx = stream_context_create();
+       stream_context_set_option($ctx, 'ssl', 'local_cert', $keys);
+       stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+       $gateway = 'ssl://gateway.push.apple.com:2195';
+       // $gateway = 'ssl://gateway.sandbox.push.apple.com:2195';
+       // Open a connection to the APNS server
+       $fp = stream_socket_client(
+           $gateway, $err,
+           $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+
+       if (!$fp)
+         exit("Failed to connect: $err $errstr" . PHP_EOL);
+
+       // Encode the payload as JSON
+       $date = array(
+         'aps'=>$aps,
+         'app_link_code'=>$custom_data['app_link_code'],
+         'channel_id'=> isset($custom_data['channel_id'])  ? $custom_data['channel_id'] : "",
+         'message_id'=> isset($custom_data['message_id']) ? $custom_data['message_id'] : "",
+         'news_id'=> isset($custom_data['newsId']) ? $custom_data['newsId'] : "",
+         'title'=> isset($custom_data['title']) ? $custom_data['title'] : "",
+       );
+       $payload = json_encode($date);
+
+       // Build the binary notification
+       $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+       // Send it to the server
+       $result = fwrite($fp, $msg, strlen($msg));
+       echo "IOSPUSH:deviceToken:".$deviceToken."   aps:".$payload."  result:".json_encode($result);
+       // $log->info("Key:".$ios_push_file." IOSPUSH:deviceToken:".$deviceToken."   aps:".$payload."  result:".json_encode($result));
+
+       // Close the connection to the server
+         // @socket_close($fp);
+       fclose($fp);
+       if (!$result)
+         return false;
+       else
+         return true;
+     }
+
+
+     public function onTask(\Swoole\Server $serv, $task_id, $src_worker_id, $data){
+
+                  if($data['type'] == "ios"){
+                          unset($data['type']);
+                          $aps = array(
+                                          'alert' => array("body" => $data['body'],"title" => ""),
+                                          'sound' => 'default',
+                                          "badge" => $data['badge']
+                                  );
+                          $this->ios_push($data['token'], $aps, $data['custom_data']);
+                          $serv->finish("Token:".$data['token']."  Body:".$data['body']);
+                  }elseif($data['type'] == "aos"){
+                          unset($data['type']);
+                          $this->aos_push($data);
+                          $serv->finish("Token:".$data['to']."  Body:".$data['data']['body']);
+                  }
+
+
+      }
+
+https://www.tradingwithrayner.com/best-trading-books-of-all-time/
+
+https://www.amazon.com/Inevitability-Becoming-Rich-Interview-Master-ebook/dp/B06XP3SHVY
+
+Mac Mini for Deep Learning
+https://medium.com/analytics-vidhya/m1-mac-mini-scores-higher-than-my-nvidia-rtx-2080ti-in-tensorflow-speed-test-9f3db2b02d74
+
+
+
+Learn, Practice, Execute, Review
+GeoAuto     (10min) ER
+HSF AlgoExp (10min) ER
+FreeStyle   (2hr)   PER
+SQX         (1hr)   LPER
+AlphaOption (1hr)   LPER
+FatBB       (1hr)   LPER
+Singor MC   ()      LPER
+
+Sat: Tx ChiefGroup money to bank
+Sat: Close SHK a/c
+Sat: Close ChiefGroup a/c
+Sat: Choir
+Mon: buy VPS (prepare SQX)
+
+Health
+  靜坐
+  拉筋
+  Wing Chun
+  Fasting
+  Dieting
+Investing
+  Auto
+    GEO
+    YammFund
+    SQX
+    AlgoExp
+  Practice
+    Manual
+  Study
+    SingorMC
+    FatBB
+    FatManStock
+    OptionAlpha
+
+over 3000 > 2:1
+under 1000 add money
+
+
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/page?view=aspnetcore-5.0&tabs=visual-studio
+
+Yamm.Zoe
+Yamm.John
+- martin
+Yamm.Polo
+- BB
+Yamm.Sing
+- ATR?
+Jacqueline
+- SSF break
+Janus
+- FTBar
+
+Fatmm.BB
+Fatman.ShortSqueeze
+Yamm.Box.LDN/NY/HSF
+S.T01.HSF
+S.AIzigTrendMagic.XAU
+J.R1R2.Retrace.HSF
+J.FTBar.Retrace.HSF
+
+
+-----Telegram [start]
+
+
+509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ
+Revoke current token
+ « Back to Bot
+
+
+
+@stephentradebot
+
+
+https://api.telegram.org/bot<API-access-token>/getUpdates?offset=0
+
+
+https://api.telegram.org/bot509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ/getUpdates?offset=0
+
+stephen
+75223057
+
+autostephenstock
+-184954443
+
+trade alert
+-261559625
+curl -X POST "https://api.telegram.org/bot509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ/sendMessage" -d "chat_id=-261559625&text=my sample text"
+
+AUTOSTOCKSLOW
+-233929208
+curl -X POST "https://api.telegram.org/bot509435673:AAHRwhzDujU7KZ9OGtt1cmGlpbF0mCtCSEQ/sendMessage" -d "chat_id=-233929208&text=AIzig()%0ANew line"
+
+
+sAPI_ID = "ENTER_HERE_YOUR_API_KEY"
+sChat_ID = "ENTER_HERE_THE_CHAT_ID"
+sMSG = Wscript.Arguments(0)
+
+'URL to open....
+sUrl = "https://api.telegram.org/bot" & sAPI_ID & "/sendMessage"
+'POST Request to send.
+sRequest = "text=" & sMSG & "&chat_id=" & sChat_ID
+
+HTTPPost sUrl, sRequest
+
+Function HTTPPost(sUrl, sRequest)
+  set oHTTP = CreateObject("Microsoft.XMLHTTP")
+  oHTTP.open "POST", sUrl,false
+  oHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+  oHTTP.setRequestHeader "Content-Length", Len(sRequest)
+  oHTTP.send sRequest
+  HTTPPost = oHTTP.responseText
+ End Function
+
+
+ curl -X POST "https://web.whatsapp.com/send?phone=85292314567&text=hello"
+
+ -----Telegram [end]
+
+
+ ---- Kubernates [start]
+
+ Node
+   Container
+     Service
+       [IP]
+   Volume
+     [Hard Disk / remote storage]
+   Ingress (connect external to services)
+     [IP]
+   ConfigMap
+   Secret
+ Deployment
+ StatefulSet
+
+ Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]
+ https://www.youtube.com/watch?v=X48VuDVv0do
+
+
+ Master
+   API Server (receive request)
+     cluster gateway
+     authentication
+   Scheduler (distribute request)
+   Controller Manager (manage node)
+   etcd (key value store)
+ Node
+   container runtime
+   Kubelet
+   KubeProxy
+
+ For development:
+   MiniKube
+
+
+ Deployment
+   ReplicaSet
+     Pod
+       Container
+
+ ---- Kubernates [end]
+
+ ---- Docker [end]
+ Docker Course
+ https://www.youtube.com/watch?v=3c-iBn73dDE
+
+ System administration complete course from beginner to advanced | IT administrator full course
+ https://www.youtube.com/watch?v=1DvTwuByjo0&t=75s
+
+ ---- Docker [end]
+
+SQX => not success
+
+
+practice: martin
+start study MT5
+supply and demand, order block
+start study pine script
+
+
+
+https://www.raywenderlich.com/20201639-firebase-cloud-messaging-for-ios-push-notifications
+https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started
+
+http://forexwinners.org
+
+https://nononsensetrader.com/inner-circle-trader-notes/
+
+https://nononsensetrader.com
+
+
+
+Music Jam over Internet
+https://jamulus.io/wiki/Getting-Started
+- Win / Mac
+- Free
+
+https://jamkazam.com/remote-music-rehearsals/
+- Win / Mac
+
+https://jammr.net/howitworks.html
+- Win / Mac
+- Not true real time
+
+https://ccrma.stanford.edu/software/jacktrip/
+- Win / Mac
+- Free
+
+https://endlesss.fm
+- iOS / Win / Mac
+- Not tested, not enough info from website
+
+
+8 Nov : AL
+16 Nov : AL
+26 Nov : AL
+3 Dec : AL
+8 Dec : AL
+16 Dec (pm) : SL
+17 Dec : AL
+20-21 Dec: AL
+22-24 Dec: SL
+28 Dec (pm): AL
+
+Login ID: theresasham
+Password: dG0d01MYUjdD
+
+https://ham.go2hopewell.com:8511/jasperserver
+
+
+Barcode ID : 792339990A
+Device ID: 001BF0191EB5
+
+
+Dear Eric,
+
+I'm Hopewell IT and want to remove domain that points to the IP 203.86.232.77
+
+It should include the following domains.
+
+takeaway.pandaplace.com.hk
+take2.pandaplace.com.hk
+demopanda.pandaplace.com.hk
+sangkee.pandaplace.com.hk
+ushishabu.pandaplace.com.hk
+citycafe.pandaplace.com.hk
+eightway.pandaplace.com.hk
+tokyoyofudo.pandaplace.com.hk
+taiwankitchen.pandaplace.com.hk
+lemonbasil.pandaplace.com.hk
+teishokueight.pandaplace.com.hk
+sappororamenen.pandaplace.com.hk
+torimoto.pandaplace.com.hk
+bafangdumpling.pandaplace.com.hk
+
+take2.theeast.com.hk
+misuseafood.theeast.com.hk
+ninetys.theeast.com.hk
+lacucinaitaliana.theeast.com.hk
+garykwok.theeast.com.hk
+twelvenoon.theeast.com.hk
+espuma.theeast.com.hk
+santorini.theeast.com.hk
+thefifties.theeast.com.hk
+
+takeaway.emaxhk.com
+take2.emaxhk.com
+demoemax.emaxhk.com
+metroplex.emaxhk.com
+ascafe.emaxhk.com
+taiwankitchen.emaxhk.com
+chillinn.emaxhk.com
+goodtaste.emaxhk.com
+legend.emaxhk.com
+casaluca.emaxhk.com
+talkcanteen.emaxhk.com
+menurestaurant.emaxhk.com
+
+Regards,
+Stephen Liu
+
+
+Complete Python NumPy Tutorial
+https://www.youtube.com/watch?v=GB9ByFAIAH4
+
+Complete Python Pandas Data Science Tutorial!
+https://www.youtube.com/watch?v=vmEHCJofslg
+
+Python for Data Science - Course for Beginners (Learn Python, Pandas, NumPy, Matplotlib)
+https://www.youtube.com/watch?v=LHBE6Q9XlzI
+
+
+https://community.jaspersoft.com/blog/installation-tibcojasperserver-61-professional-ubuntu-1504-installing-tibcojasperserver-vmware
+https://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v790/troubleshooting-your-jasperreports
+https://community.jaspersoft.com/questions/1080101/jasperserver-reports-migration-another-server
+https://community.jaspersoft.com/documentation/tibco-jasperreports-server-administrator-guide/v640/import-and-export-through-web-ui
+https://community.jaspersoft.com/project/jasperreports-server/releases
+https://www.jaspersoft.com/editions?_ga=2.29733820.2032408096.1646893789-1837734676.1646300160
+https://sourceforge.net/projects/jasperserver/
+https://community.jaspersoft.com/documentation/tibco-jasperreports-server-security-guide/v7/managing-keys-import-and-export
+
+
+Deep reinforcement Learning = course
+https://www.youtube.com/watch?v=e2PpdPC34kI&list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH&index=9
+http://rail.eecs.berkeley.edu/deeprlcourse/
+https://stable-baselines3.readthedocs.io/en/master/guide/rl.html
+https://stable-baselines3.readthedocs.io/en/master/guide/rl_tips.html
+https://www.kdnuggets.com/2019/11/deep-learning-image-classification-less-data.html
+Reinforcement Learning in 3 hr
+https://www.youtube.com/watch?v=Mut_u40Sqz4
+
+Python for data Science
+https://www.youtube.com/watch?v=LHBE6Q9XlzI
+https://www.youtube.com/watch?v=rfscVS0vtbw
+Pandas
+https://www.youtube.com/watch?v=vmEHCJofslg
+NumPy
+https://www.youtube.com/watch?v=GB9ByFAIAH4
+
+
+
+https://www.google.com/search?client=safari&rls=en&q=appgyver+database&ie=UTF-8&oe=UTF-8
+https://docs.appgyver.com/data/configuring-data-resources
+https://forums.appgyver.com/t/database-recommendation-list/7532/5
+https://muut.com/i/appgyver/steroids:how-can-i-connect-my-app-wi
+https://www.mssqltips.com/sqlservertip/6803/build-secure-sql-server-rest-api-minutes/
+https://www.dreamfactory.com
+https://www.google.com/search?client=safari&rls=en&q=dreamfactory+free+version&ie=UTF-8&oe=UTF-8
+https://platform.appgyver.com/auth/community?redirect_to=https%3A%2F%2Fplatform.appgyver.com%2Fbuilder%2Fapplications%2F283702%2Fpages%2F3
+https://www.google.com/search?client=safari&rls=en&q=appgyver+deploy&ie=UTF-8&oe=UTF-8
+https://docs.appgyver.com/publishing/distributing-your-app
+
+
+
+Alan Ho
+2863 2506
+
+alanho
+88uJA0dbdztn
+codytang
+KAw38Bkbbdh6
+andychen
+j5M1RvLDXVfh
+
+
+create project
+- permission
+- create task
+- upload document
+notification
+
+
+DB06
+CPU: CPU Xeon CPU E5-2640 v4@2.4GHz 4 processor (8 threads)
+Memory: 32GB
+C Drive: 100G
+D Drive: 500G
+Windows Server 2012
+MSSql 2012
+
+https://t.me/+o0mZRZDPNy0yOWY0
+@StockIntelligence
+https://t.me/joinchat/R7X0HRkh5FFc06kC
+
+
+ML
+https://scikit-learn.org/stable/getting_started.html
+https://www.google.com/search?client=safari&rls=en&q=tutorial+machine+learning&ie=UTF-8&oe=UTF-8
+https://www.tensorflow.org/resources/learn-ml?gclid=CjwKCAjwq5-WBhB7EiwAl-HEkgfbhgZdifyYKrpPOOlK2a0Xr7Sk8DHjeIi97L81TtRiq9c4g_P8RBoCz20QAvD_BwE
+https://www.tensorflow.org/resources/learn-ml/basics-of-machine-learning
+https://www.oreilly.com/library/view/ai-and-machine/9781492078180/
+https://catboost.ai/en/docs//
+https://catboost.ai/en/docs/concepts/tutorials
+
+ML-backpropagation
+https://www.google.com/search?client=safari&rls=en&q=neural+network+how+backpropagation+work&ie=UTF-8&oe=UTF-8
+https://medium.com/m/global-identity?redirectUrl=https%3A%2F%2Ftowardsdatascience.com%2Fhow-does-back-propagation-in-artificial-neural-networks-work-c7cad873ea7
+
+Numpy
+https://www.google.com/search?q=python+numpy+astype&client=safari&rls=en&ei=1arYYvf4OqGOseMP-I61yAk&ved=0ahUKEwi3t_2l6Yj5AhUhR2wGHXhHDZkQ4dUDCA4&uact=5&oq=python+numpy+astype&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgUIABCABDIGCAAQHhAWMgYIABAeEBYyBggAEB4QFjIGCAAQHhAWMggIABAeEA8QFjIGCAAQHhAWMgYIABAeEBYyBggAEB4QFjoHCAAQRxCwAzoHCAAQsAMQQzoECAAQQzoFCAAQkQJKBAhBGABKBAhGGABQ8AFYwxRgrhZoAXABeACAAUCIAZMDkgEBN5gBAKABAcgBCsABAQ&sclient=gws-wiz
+https://numpy.org/doc/stable/reference/generated/numpy.ndarray.astype.html
+https://numpy.org/doc/stable/user/absolute_beginners.html
+
+Python enviornment
+https://www.google.com/search?client=safari&rls=en&q=how+to+set+up+python+enviornment&ie=UTF-8&oe=UTF-8
+https://www.tutorialspoint.com/python/python_environment.htm#
+https://www.google.com/search?client=safari&rls=en&q=how+to+use+virtualenv&ie=UTF-8&oe=UTF-8
+https://towardsdatascience.com/create-virtual-environment-using-virtualenv-and-add-it-to-jupyter-notebook-6e1bf4e03415
+
+Grammar
+https://www.google.com/search?q=english+grammar&client=safari&rls=en&sxsrf=ALiCzsaA25QW2Qtn5Bk4waVidcY5RzY0nA%3A1660014733873&ei=jdDxYq7uNMaG2roPuKKR0AM&ved=0ahUKEwju6KLk5Lj5AhVGg1YBHThRBDoQ4dUDCA0&uact=5&oq=english+grammar&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBQgAEJECMggILhDUAhCRAjIFCAAQkQIyBQgAEJECMgUIABCRAjIICC4Q1AIQkQIyBQgAEIAEMgUIABCABDIFCAAQgAQ6BwgAEEcQsANKBAhBGABKBAhGGABQpwlYsA1g0A9oAnABeACAAaICiAGuBZIBBTEuMi4xmAEAoAEByAEIwAEB&sclient=gws-wiz
+https://www.perfect-english-grammar.com/grammar-exercises.html
+https://www.grammarly.com/blog/prepositions/
+https://en.wikipedia.org/wiki/English_grammar
+
+
+
+https://restfulapi.net/rest-put-vs-post/
+https://www.youtube.com/watch?v=q_eLPG4PDM8
+https://www.youtube.com/watch?v=J6ZKwg8K--s
+
+
+兩兩紅結手牽手，
+二人一心創家園。
+日夜不休忙不停，
+苦心養育三孩兒。
+路遙艱辛並肩闖，
+甜酸苦辣一起嘗。
+歲月風波情還在，
+不離不棄五十載。
+願倆珍惜身旁伴，
+放開懷抱享生活。
+夫妻銀婚實難事，
+與伴舉杯同慶祝。
+
+
+紅線雙牽結姻緣，
+二人一心創家園。
+日工夜作忙不盡，
+苦心養育三孩兒。
+道遠路遙並肩闖，
+甜酸苦辣一起嘗。
+歷盡風波情常在，
+不離不棄五十載。
+相互珍惜身旁伴，
+放開懷抱享生活。
+夫妻銀婚實幸事，
+舉杯同慶賀今年。
+
+紅線倆牽結姻緣，
+二人一心創家園。
+日工夜作忙不盡，
+苦心養育三孩兒。
+道遠路遙並肩闖，
+甜酸苦辣一起嘗。
+歷盡風波情常在，
+不離不棄五十載。
+相互珍惜身旁伴，
+放開懷抱享生活。
+夫妻銀婚實幸事，
+舉杯同慶賀今年。
+
+
+歌詞
+其實很簡單 其實很自然
+qí shí hěn jiǎn dān
+qí shí hěn zì rán
+兩個人的愛由兩人分擔
+liǎng gè rén de ài yóu liǎng rén fēn dān
+其實並不難 是你太悲觀
+qí shíbìngbù nán
+shìnǐtàibēi guān
+隔著一道牆不跟誰分享
+gé zhù yī dào qiáng bù gēn shéi fēn xiǎng
+不想讓你為難
+bù xiǎng ràng nǐ wéi nán
+你不再需要給我個答案
+nǐ bù zài xū yào jǐ wǒ gè dá àn
+
+我想你是愛我的
+wǒ xiǎng nǐ shì ài wǒ de
+我猜你也捨不得
+wǒ cāi nǐ yě shě bù de
+但是怎麼說 總覺得
+dàn shi zěn me shuō zǒng jué de
+我們之間留了太多空白格
+wǒ men zhī jiān liú liǎo tài duō kòng bái gé
+也許你不是我的
+yě xǔ nǐ bù shì wǒ de
+愛你卻又該割捨
+ài nǐ què yòu gāi gē shě
+分開或許是選擇
+fēn kāi huò xǔ shì xuǎn zé
+但它也可能是我們的緣份
+dàn tā yě kě néng shì wǒ men de yuán fèn
+
+其實很簡單 其實很自然
+兩個人的愛由兩人分擔
+其實並不難 是你太悲觀
+隔著一道牆不跟誰分享
+不想讓你為難
+你不再需要給我個答案
+
+我想你是愛我的
+我猜你也捨不得
+但是怎麼說 總覺得
+我們之間留了太多空白格
+也許你不是我的
+愛你卻又該割捨
+分開或許是選擇
+但它也可能是我們的緣份
+
+我想你是愛我的
+我猜你也捨不得
+但是怎麼說 總覺得
+我們之間留了太多空白格
+也許你不是我的
+愛你卻又該割捨
+分開或許是選擇
+但它也可能是我們的緣份
+
+
+陀飛輪
+過去十八歲 沒戴錶 不過有時間
+夠我沒有後顧 野性貪玩
+霎眼廿七歲 時日無多方不敢偷懶
+宏願縱未了 奮鬥總不太晚
+然後突然今秋
+望望身邊 應該有 已盡有
+我的美酒 跑車 相機 金錶 也講究
+直到世間 個個也妒忌 仍不怎麼富有
+用我尚有 換我沒有 其實已用盡所擁有
+曾付出 幾多心跳
+來換取一堆堆的發票
+人值得 命中減少幾秒 多買一隻錶
+秒速 捉得緊了
+而皮膚竟偷偷鬆了
+為何用到盡了 至知哪樣緊要
+勞力是無止境
+活著多好 不需要 靠物證
+也不以高薪 高職 高級品 搏尊敬
+就算搏到 伯爵那地位 和蕭邦的雋永
+賣了任性 日拼夜拼 忘掉了為什麼高興
+曾付出 幾多心跳
+來換取一堆堆的發票
+人值得 命中減少幾秒 多買一隻錶
+秒速 捉得緊了
+而皮膚竟偷偷鬆了
+為何用到盡了 至知哪樣緊要
+記住那關於光陰的教訓
+回頭走天已暗
+你獻出了十吋 時和分
+可有換到十吋金
+還剩低 幾多心跳
+人面跟水晶錶面對照
+連自己 亦都分析不了 得到多與少
+也許 真的瘋了
+那個倒影 多麼可笑
+靈魂若變賣了 上鏈也沒心跳
+銀或金 都不緊要
+誰造機芯 一樣了
+計劃了 照做了 得到了 時間卻太少
+還剩低 幾多心跳
+還在數 趕不及了
+昂貴是這刻 我覺悟了
+在時計裡 看破一生 渺渺
