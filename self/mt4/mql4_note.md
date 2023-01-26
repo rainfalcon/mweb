@@ -10,3 +10,4 @@
 - [FANN2MQL used as filter in EA](https://github.com/suvorovkonstantin/MQL4/blob/master/experts/NeuroMACD-fixed.mq4)
 - [EA scalping example](https://www.forexfactory.com/thread/240358-extreme-scalping-using-neural-networks-eamanual)
 - [EA scalping](https://www.forexfactory.com/thread/222915-lets-build-a-neural-network-based-scalper-together)
+- [MT5 example](https://www.forexfactory.com/thread/post/4091269#post4091269)
