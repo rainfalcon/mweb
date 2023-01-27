@@ -20,6 +20,15 @@
 - [Coursera Reinforcement Learing for Trading](https://www.coursera.org/learn/trading-strategies-reinforcement-learning/lecture/WsJCD/what-is-reinforcement-learning)
   - Enviornment
   - Agent
-    - State
-    - Action
-  - Reward
+    - State (s)
+    - Action (a)
+    - Step (t) 1 transition between step
+  - Reward r / R(s,a)
+  - Sequence Modelling vs Reinforcement Learning
+    - Sequence modelling predict the price tomorrow
+    - RL determine the best action to max reward
+  - RL (Intelligence)
+    - Decision Making
+    - Curiosity
+    - Reactivity
+    - Memory
