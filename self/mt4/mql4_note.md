@@ -11,3 +11,15 @@
 - [EA scalping example](https://www.forexfactory.com/thread/240358-extreme-scalping-using-neural-networks-eamanual)
 - [EA scalping](https://www.forexfactory.com/thread/222915-lets-build-a-neural-network-based-scalper-together)
 - [MT5 example](https://www.forexfactory.com/thread/post/4091269#post4091269)
+
+# Fx Resource
+- [Forex Wiki Trading](https://forexwikitrading.com/ko/fx-ind/artificial-neural-network-based-indicator-5-bar-forecasting-of-price-movement/)
+- [FANN Forex Wiki](http://fann4mt.thetradingtheory.com/artificial-neural-networks-survival-guide/)
+
+# Reinforcement Neural Netowrk
+- [Coursera Reinforcement Learing for Trading](https://www.coursera.org/learn/trading-strategies-reinforcement-learning/lecture/WsJCD/what-is-reinforcement-learning)
+  - Enviornment
+  - Agent
+    - State
+    - Action
+  - Reward
